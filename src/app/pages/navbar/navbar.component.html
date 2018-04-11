@@ -1,0 +1,67 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" [routerLink]="['/']">
+				BUMBLEBEE
+				<span>v.0.4</span>
+			</a>
+			<div id="mobile-menu">
+				<div class="left-nav-toggle">
+					<a (click)="toggleMenu()">
+						<i class="stroke stroke-hamburgermenu"></i>
+					</a>
+				</div>
+				<li *ngIf="authService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class=" profil-link">
+					<a [routerLink]="['/profile']">
+						<img *ngIf="!authService.user.avatar" src="https://public.acloud.guru/assets/profile-no-image.png" class="img-circle" alt="">
+						<img *ngIf="authService.user.avatar" src="{{authService.user.avatar}}" class="img-circle" alt="">
+					</a>
+				</li>
+
+				<div class="right">
+					<li *ngIf="authService.isLoggedIn()">
+						<a (click)="logout()">Logout</a>
+					</li>
+					<li *ngIf="!authService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+						<a [routerLink]="['/login']">Login</a>
+					</li>
+					<li *ngIf="!authService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+						<a [routerLink]="['/register']">Register</a>
+					</li>
+				</div>
+
+			</div>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<div class="left-nav-toggle">
+				<a (click)="toggleMenu()">
+					<i class="stroke stroke-hamburgermenu"></i>
+				</a>
+			</div>
+			<ul class="nav navbar-nav navbar-left">
+				<li *ngIf="authService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class=" profil-link">
+					<a [routerLink]="['/profile']">
+						<img *ngIf="!authService.user.avatar" src="https://public.acloud.guru/assets/profile-no-image.png" class="img-circle" alt="">
+						<img *ngIf="authService.user.avatar" src="{{authService.user.avatar}}" class="img-circle" alt="">
+						<span *ngIf="authService.user.name" class="profile-address">{{authService.user.name}}</span>
+						<span *ngIf="!authService.user.name && authService.user.username" class="profile-address">{{authService.user.username}}</span>
+					</a>
+				</li>
+			</ul>
+			<!-- <form class="navbar-form navbar-left" (submit)="tryTTS()">
+				<input name="tts" [(ngModel)]="tts" type="text" class="form-control" placeholder="Enter text for magic" style="width: 175px">
+			</form> -->
+			<ul class="nav navbar-nav navbar-right">
+				<li *ngIf="authService.isLoggedIn()">
+					<a (click)="logout()">Logout</a>
+				</li>
+				<li *ngIf="!authService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+					<a [routerLink]="['/login']">Login</a>
+				</li>
+				<li *ngIf="!authService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+					<a [routerLink]="['/register']">Register</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

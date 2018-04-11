@@ -1,0 +1,17 @@
+{
+	"short_name": "Bumblebee",
+	"name": "Bumblebee",
+	"start_url": "/",
+	"theme_color": "#f6a821",
+	"background_color": "#ffffff",
+	"display": "standalone",
+	"orientation": "portrait",
+	"icons": [
+		{
+			"src": "/assets/icons/bumblebee-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
+
+}

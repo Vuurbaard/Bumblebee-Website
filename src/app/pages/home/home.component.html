@@ -1,0 +1,47 @@
+<div class="panel panel-filled">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel-body h-200 list">
+				<div class="stats-title pull-left">
+					<h4>Hello, I'm Bumblebee</h4>
+				</div>
+				<div class="m-t-xl">
+					<small>
+						I can convert sentences into audio fragments from various sources. Just like text to speech!
+					</small>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<br/>
+						<a href="#" class="btn btn-block btn-accent">Try me!</a>
+					</div>
+
+					<!-- <div class="col-md-6">
+						<small class="stat-label">Today</small>
+						<h4 class="m-t-xs">170,20
+							<i class="fa fa-level-up text-warning"></i>
+						</h4>
+					</div>
+					<div class="col-md-6">
+						<small class="stat-label">Last month %</small>
+						<h4 class="m-t-xs">%20,20
+							<i class="fa fa-level-down c-white"></i>
+						</h4>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="panel panel-filled" [class.ld-loading]="loading">
+
+	<div class="panel-body">
+		<!-- <div class="text-center slight"></div> -->
+
+		<div id="waveform-home"></div>
+		<div class="small text-center">{{text}}</div>
+		<button class="btn btn-default" [hidden]="playing" (click)="play()">Play</button>
+		<button class="btn btn-default" [hidden]="!playing" (click)="pause()">Pause</button>
+	</div>
+
+</div>
