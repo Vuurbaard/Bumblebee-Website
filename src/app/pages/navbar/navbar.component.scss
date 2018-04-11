@@ -1,0 +1,26 @@
+#mobile-menu {
+	li {
+		list-style: none;
+		display: inline-block;
+
+		a {
+			padding: 10px 0px;
+			position: relative;
+			display: block;
+			color: #6a727a;
+			text-transform: uppercase;
+			font-weight: 500;
+		}
+
+	}
+
+	.right {
+		float: right;
+		display: block;
+
+		a {
+			line-height: 40px;
+			padding-right: 15px;
+		}
+	}
+}

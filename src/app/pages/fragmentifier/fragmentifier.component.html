@@ -1,0 +1,105 @@
+<div class="fluid-container">
+	<div class="col-lg-12">
+		<div class="view-header">
+			<div class="header-icon">
+				<i class="pe page-header-icon pe-7s-scissors"></i>
+			</div>
+			<div class="header-title">
+				<h3 class="m-b-xs">Fragmentifier</h3>
+				<small>
+					You can start fragmenting audio from youtube here
+				</small>
+			</div>
+		</div>
+		<hr>
+	</div>
+</div>
+
+<div class="fluid-container" [hidden]="downloaded">
+	<div class="panel panel-filled" [class.ld-loading]="loading">
+		<div class="panel-body">
+			<div class="loader">
+				<div class="loader-bar"></div>
+			</div>
+			<form (submit)="download()" class="form-horizontal">
+				<div class="form-group">
+					<label for="inputYouTube" class="col-lg-2 control-label">YouTube url</label>
+					<div class="col-lg-10">
+						<input type="text" [(ngModel)]="url" name="youtube" class="form-control" id="inputYouTube" placeholder="YouTube url">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-10 col-lg-offset-2">
+						<button type="submit" class="btn btn-accent">Download</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="fluid-container" [hidden]="!downloaded">
+
+	<div class="panel panel-filled" [class.ld-loading]="loading">
+		<div class="panel-body">
+			<div class="loader">
+				<div class="loader-bar"></div>
+			</div>
+
+			<div id="waveform">
+				&nbsp;
+			</div>
+
+			<div class="row form-group">
+				<input id="slider" type="range" min="1" max="250" value="0" style="width: 100%" />
+			</div>
+
+			<div class="row form-group">
+				<div class="controls">
+					<div class="col-md-4 col-xs-4">
+						<button class="btn btn-accent" [hidden]="isFragmenting" (click)="fragmentStart()">Start fragment</button>
+						<button class="btn btn-accent" [hidden]="!isFragmenting" (click)="fragmentEnd()">End fragment</button>
+					</div>
+					<div class="col-md-4 col-xs-4 text-center">
+						<button class="btn btn-default" [hidden]="playing" (click)="play()">Play</button>
+						<button class="btn btn-default" [hidden]="!playing" (click)="pause()">Pause</button>
+					</div>
+					<div class="col-md-4 col-xs-4 text-right">
+						<button class="btn btn-success" (click)="save()">Save</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="fragments">
+				<div class="form-group" *ngFor="let fragment of fragments | orderBy : ['-start']">
+					<div class="input-group">
+
+						<span class="input-group-addon ">
+							{{fragment.start | number : '1.2-2'}}
+							<i class="fa fa-play fa-rotate-270 text-warning" (click)="adjust(fragment, 'start', 'up')"></i>
+							<i class="fa fa-play fa-rotate-90 text-warning" (click)="adjust(fragment, 'start', 'down')"></i>
+						</span>
+						<span class="input-group-addon">
+							{{fragment.end | number : '1.2-2'}}
+							<i class="fa fa-play fa-rotate-270 text-warning" (click)="adjust(fragment, 'end', 'up')"></i>
+							<i class="fa fa-play fa-rotate-90 text-warning" (click)="adjust(fragment, 'end', 'down')"></i>
+						</span>
+						<span class="input-group-addon play" (click)="playFragment(fragment)">
+							<i class="fa fa-play"></i>
+						</span>
+
+						<input type="text" class="form-control" [(ngModel)]="fragment.word.text">
+
+						<span class="input-group-btn">
+							<button class="btn btn-danger text-danger" type="button" (click)="removeFragment(fragment)" [hidden]="fragment.id" [attr.disabled]="fragment.id">
+								<i class="fa fa-trash-o" aria-hidden="true"></i>
+							</button>
+						</span>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

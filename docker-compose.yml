@@ -1,0 +1,19 @@
+version: '3'
+services:
+
+    website:
+        build:
+            context: ./
+            dockerfile: docker/Dockerfile
+            args:
+                - NPM_INSTALL_BEFORE=false
+        environment:
+            - NODE_ENV=development
+            - ANGULAR_ENV=dev
+            - NG_OPTIONAL=--watch=true --poll
+            - USE_NODEMON=false
+            - NPM_INSTALL_AFTER=true
+        volumes:
+            - ./:/var/www/html
+        ports:
+            - 80:80

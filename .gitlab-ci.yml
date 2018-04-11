@@ -1,0 +1,33 @@
+image: ubuntu:latest
+
+stages:
+ - build
+ - test
+ - deploy
+
+build website:
+  image: docker:dind
+  script:
+    # install composer and get dependencies
+    - echo $CI_ENVIRONMENT_SLUG
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.mijnproject.nu
+    - docker build -t ${CI_REGISTRY}/bumblebee/website:build-${CI_COMMIT_REF_SLUG} --build-arg NPM_INSTALL_BEFORE=true --build-arg DOCKER_SRC=./docker/  -f docker/Dockerfile ./
+    - docker push ${CI_REGISTRY}/bumblebee/website:build-${CI_COMMIT_REF_SLUG}
+
+
+# Push the image to Docker Swarm as service and run a rolling deploy
+push to production:
+  image: docker:dind
+  stage: deploy
+  variables:
+    DOCKER_HOST: tcp://192.168.178.30:2375
+  image: docker:latest
+  script:
+    - echo $CI_ENVIRONMENT_SLUG
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.mijnproject.nu
+    - docker stack deploy --with-registry-auth --compose-file=docker-stack-compose.yml ${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}
+  environment:
+    name: bumblebee-fm
+    url: https://www.bumblebee.fm
+  only:
+    - master

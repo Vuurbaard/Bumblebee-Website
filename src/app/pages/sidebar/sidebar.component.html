@@ -1,0 +1,59 @@
+<aside class="navigation">
+	<nav>
+		<ul class="nav luna-nav">
+			<li class="nav-category">
+				Main
+			</li>
+			<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+				<a [routerLink]="['/dashboard']">Dashboard</a>
+			</li>
+			<li class="nav-category">
+				Audio
+			</li>
+			<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+				<a [routerLink]="['/fragmentifier']">Fragmentifier</a>
+			</li>
+			<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+				<a [routerLink]="['/overview']">Overview</a>
+			</li>
+
+			<li class="nav-category" [hidden]="!isAdmin">
+				Admin
+			</li>
+			<li [hidden]="!isAdmin">
+				<a href="#databaseviews" data-toggle="collapse" aria-expanded="false" class="collapsed" aria-controls="databaseviews">
+					Databaseviews
+					<span class="sub-nav-icon">
+						<i class="stroke-arrow"></i>
+					</span>
+				</a>
+				<ul id="databaseviews" class="nav nav-second collapse" aria-expanded="false" style="height: 0px;">
+					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+						<a [routerLink]="['/admin/users']">Users</a>
+					</li>
+					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+						<a [routerLink]="['/admin/sources']">Sources</a>
+					</li>
+					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+						<a [routerLink]="['/admin/fragments']">Fragments</a>
+					</li>
+					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+						<a [routerLink]="['/admin/words']">Words</a>
+					</li>
+				</ul>
+			</li>
+
+
+			<li class="nav-info">
+				<a class="platform-logo discord" href="https://discordapp.com/oauth2/authorize?client_id=312659661776093185&permissions=0&scope=bot"
+				 target="_blank">
+					<img src="https://discordapp.com/assets/192cb9459cbc0f9e73e2591b700f1857.svg">
+				</a>
+				<div class="m-t-xs">
+					Click on the discord logo to add Bumblebee to your Discord server!
+				</div>
+
+			</li>
+		</ul>
+	</nav>
+</aside>
