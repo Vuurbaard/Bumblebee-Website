@@ -8,6 +8,7 @@ services:
             - ANGULAR_ENV=prod
             - USE_NODEMON=false
             - NPM_INSTALL_AFTER=false
+            - NG_OPTIONAL=--prod
         ports:
             - 8280:80
         depends_on:
