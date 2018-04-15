@@ -1058,7 +1058,7 @@ body {
     margin-top: 60px;
     background-color: transparentize(#24262d, .3);
     width: 200px;
-    position: absolute;
+    position: fixed;
     left: -200px;
     bottom: 0;
     top: 0;
@@ -1370,6 +1370,7 @@ img.image-xl {
     float: right;
     font-size: 12px;
     margin-left: -15px;
+    margin-top: 2px;
     color: #fce2b4;
 }
 
