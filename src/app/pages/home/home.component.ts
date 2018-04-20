@@ -16,36 +16,41 @@ declare var MinimapPlugin: any;
 export class HomeComponent implements OnInit {
 
 	wavesurfer: any;
+
+	loadedText: string = "";
 	text: string = "Please let this work";
+	randomTexts: Array<string> = [
+		"Please let this work",
+		"I don't want to get some help",
+		"Whatever it is it's not right on the teleprompter"
+	];
+
 	loading: Boolean = false;
 	playing: Boolean = false;
+	autoPlay: Boolean = false;
 
-	constructor(private audioService: AudioService, private zone: NgZone) { 
-	
+	constructor(private audioService: AudioService, private zone: NgZone) {
+
 	}
 
 	ngOnInit() {
-
-		//var TimelinePlugin = WaveSurfer.timeline;
 
 		this.wavesurfer = WaveSurfer.create({
 			container: '#waveform-home',
 			waveColor: 'white',
 			progressColor: '#f6a821',
 			plugins: [
-				// WaveSurfer.timeline.create({
-				// 	container: '#waveform-home'
-				// }),
 				WaveSurfer.regions.create()
 			]
 		});
 
 		this.wavesurfer.on('ready', () => {
-
-			//this.wavesurfer.enableDragSelection({});
-
 			this.zone.run(() => {
 				this.loading = false;
+
+				if (this.autoPlay) {
+					this.play();
+				}
 			});
 		});
 
@@ -73,19 +78,29 @@ export class HomeComponent implements OnInit {
 	load(text: string) {
 		this.loading = true;
 		this.audioService.tts(text).subscribe(data => {
-			// debugger;
 			console.log('loading', data.file)
 			this.wavesurfer.load(environment.apiUrl + data.file);
+			this.loadedText = text;
 		});
 	}
 
 	play() {
-		this.wavesurfer.play();
+		if (this.loadedText != this.text) {
+			this.autoPlay = true;
+			this.load(this.text);
+		}
+		else {
+			this.wavesurfer.play();
+		}
 	}
 
 	pause() {
 		this.wavesurfer.pause();
 	}
 
-	
+	try() {
+		this.text = this.randomTexts[Math.floor(Math.random() * this.randomTexts.length)];
+		this.autoPlay = true;
+		this.load(this.text);
+	}
 }

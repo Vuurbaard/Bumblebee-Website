@@ -2,6 +2,7 @@ version: '3'
 services:
 
     website:
+        container_name: bumblebee_website
         build:
             context: ./
             dockerfile: docker/Dockerfile

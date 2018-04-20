@@ -1,22 +1,24 @@
-<div class="panel panel-filled">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="panel-body h-200 list">
-				<div class="stats-title pull-left">
-					<h4>Hello, I'm Bumblebee</h4>
-				</div>
-				<div class="m-t-xl">
-					<small>
-						I can convert sentences into audio fragments from various sources. Just like text to speech!
-					</small>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<br/>
-						<a href="#" class="btn btn-block btn-accent">Try me!</a>
-					</div>
+<div class="row">
+	<div class="col-md-6">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-filled">
+					<div class="panel-body h-200 list">
+						<div class="stats-title pull-left">
+							<h4>Hello, I'm Bumblebee</h4>
+						</div>
+						<div class="m-t-xl">
+							<small>
+								I can convert sentences into audio fragments from various sources. Just like text to speech!
+							</small>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<br/>
+								<a class="btn btn-block btn-accent" (click)="try()">Try me!</a>
+							</div>
 
-					<!-- <div class="col-md-6">
+							<!-- <div class="col-md-6">
 						<small class="stat-label">Today</small>
 						<h4 class="m-t-xs">170,20
 							<i class="fa fa-level-up text-warning"></i>
@@ -28,20 +30,31 @@
 							<i class="fa fa-level-down c-white"></i>
 						</h4>
 					</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="panel panel-filled" [class.ld-loading]="loading">
+
+					<div class="panel-body text-center">
+						<div id="waveform-home"></div>
+						<input type="text" [(ngModel)]="text" id="tts-text">
+						<br/>
+						<br/>
+						<button class="btn btn-default center" [hidden]="playing" (click)="play()">Play</button>
+						<button class="btn btn-default center" [hidden]="!playing" (click)="pause()">Pause</button>
+					</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<div class="panel panel-filled" [class.ld-loading]="loading">
-
-	<div class="panel-body">
-		<!-- <div class="text-center slight"></div> -->
-
-		<div id="waveform-home"></div>
-		<div class="small text-center">{{text}}</div>
-		<button class="btn btn-default" [hidden]="playing" (click)="play()">Play</button>
-		<button class="btn btn-default" [hidden]="!playing" (click)="pause()">Pause</button>
+	<div class="col-md-6">
+		<div class="panel panel-filled">
+			<div class="panel-body">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sed aliquam dui, at condimentum augue. Praesent est tortor, aliquet vitae augue id, cursus ornare nisi. Donec facilisis mi risus. In tempus pretium mauris quis sagittis. Pellentesque eget ex id tellus venenatis dignissim vitae feugiat nulla. Sed feugiat purus eleifend metus suscipit volutpat. Nam vitae feugiat odio. Praesent facilisis pulvinar porta. Nulla facilisi. Pellentesque nibh metus, mollis eget sem id, aliquam fermentum nisl. Proin ultrices mollis orci ac ullamcorper. Vivamus vel odio ac lacus molestie luctus.
+			</div>
+		</div>
 	</div>
-
 </div>
