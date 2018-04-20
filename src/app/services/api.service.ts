@@ -10,19 +10,18 @@ export class ApiService {
 
 	}
 
-	private defaultHeaders() : Headers {
+	private defaultHeaders(): Headers {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 		headers.append('Authorization', this.authenticationService.token);
 		return headers;
 	}
 
-	get(url) {
-		
-		return this.http.get(environment.apiUrl + url, { headers: this.defaultHeaders() }).map(res => res.json());
+	public get<T>(relativeUrl: string) {
+		return this.http.get(environment.apiUrl + relativeUrl, { headers: this.defaultHeaders() }).map(res => res.json());
 	}
 
-	post(url, data) {
-		return this.http.post(environment.apiUrl + url, data, { headers: this.defaultHeaders() }).map(res => res.json());
+	public post(relativeUrl: string, data: any) {
+		return this.http.post(environment.apiUrl + relativeUrl, data, { headers: this.defaultHeaders() }).map(res => res.json());
 	}
 }

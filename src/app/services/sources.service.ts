@@ -3,6 +3,7 @@ import { environment } from './../../environments/environment';
 import { Http, Headers } from '@angular/http';
 import { AuthenticationService } from './authentication.service';
 import { Injectable } from '@angular/core';
+import { ISource } from '../models/source';
 
 @Injectable()
 export class SourcesService extends ApiService {
@@ -12,7 +13,7 @@ export class SourcesService extends ApiService {
 	}
 
 	all() {
-		return this.get('/sources');
+		return this.get<ISource>('/sources');
 	}
 
 }
