@@ -10,10 +10,6 @@ export class AuthenticationService {
 	constructor(private http: Http, private jwtHelper: JwtHelperService) {
 	}
 
-	login() {
-
-	}
-
 	logout() {
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('user');
@@ -23,14 +19,14 @@ export class AuthenticationService {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
-		return this.http.post(environment.apiUrl + '/login', user, { headers: headers }).map(res => res.json());
+		return this.http.post(environment.apiUrl + '/users/login', user, { headers: headers }).map(res => res.json());
 	}
 
 	registerUser(user) {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
-		return this.http.post(environment.apiUrl + '/register', user, { headers: headers }).map(res => res.json());
+		return this.http.post(environment.apiUrl + '/users/register', user, { headers: headers }).map(res => res.json());
 	}
 
 	storeUserData(token, user) {
@@ -42,6 +38,15 @@ export class AuthenticationService {
 		const token: string = localStorage.getItem('access_token');
 
 		return token != null && !this.jwtHelper.isTokenExpired(token);
+	}
+
+	hasRole(role: string) : boolean {
+
+		if(this.user && this.user.roles.includes(role)) {
+			return true;
+		}
+		
+		return false;
 	}
 
 	get user() {
