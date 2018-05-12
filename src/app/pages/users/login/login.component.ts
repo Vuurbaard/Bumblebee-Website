@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 	ngOnInit() {
 		this.route.params.subscribe(params => {
 			this.redirectTo = params['redirect'];
-			console.log('should redirect to', this.redirectTo);
+			//console.log('should redirect to', this.redirectTo);
 		});
 	}
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 			password: this.password
 		}
 
-		this.authService.authenticateUser(user).subscribe(data => {
+		this.authService.authenticateUser(user).toPromise().then(data => {
 			if (data.success) {
 				this.authService.storeUserData(data.token, data.user);
 				this.flashMessagesService.show('You are now logged in', {
@@ -43,15 +43,15 @@ export class LoginComponent implements OnInit {
 				else {
 					this.router.navigate(['/']);
 				}
+			}
+		}).catch(data => {
 
-			}
-			else {
-				this.flashMessagesService.show(data.msg, {
-					cssClass: 'alert-danger',
-					timeout: 5000
-				});
-				this.router.navigate(['login']);
-			}
+			this.flashMessagesService.show('Username or password is incorrect', {
+				cssClass: 'alert-danger',
+				timeout: 5000
+			});
+			
+			this.router.navigate(['login']);
 		});
 	}
 }
