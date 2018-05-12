@@ -20,33 +20,26 @@ export class RegisterComponent implements OnInit {
 	}
 
 	onRegisterSubmit() {
+
 		const user = {
 			email: this.email,
 			username: this.username,
 			password: this.password
 		}
 
-		// Check required fields
-		// if (!this.validateService.validateRegister(user)) {
-		// 	this.flashMessagesService.show('Please fill in all fields', { cssClass: 'alert-danger' });
-		// }
-
-		// // Validate email
-		// else if (!this.validateService.validateEmail(user.email)) {
-		// 	this.flashMessagesService.show('Please enter a valid email', { cssClass: 'alert-danger' });
-		// }
-
 		this.authenticationService.registerUser(user).toPromise().then(data => {
 			if (data.success) {
 				this.flashMessagesService.show('You are now register and can login', { cssClass: 'alert-success' });
 				this.router.navigate(['/login']);
 			}
+		}).catch(data => {
+			if(data.json().message) {
+				this.flashMessagesService.show(data.json().message, { cssClass: 'alert-danger' });
+			}
 			else {
 				this.flashMessagesService.show('Something went wrong', { cssClass: 'alert-danger' });
-				this.router.navigate(['/register']);
 			}
-		}).catch(() => {
-			this.flashMessagesService.show('Something went wrong', { cssClass: 'alert-danger' });
+			this.router.navigate(['/register']);
 		});
 	}
 

@@ -19,14 +19,14 @@ export class AuthenticationService {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
-		return this.http.post(environment.apiUrl + '/users/login', user, { headers: headers }).map(res => res.json());
+		return this.http.post(environment.apiUrl + '/v1/login', user, { headers: headers }).map(res => res.json());
 	}
 
 	registerUser(user) {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
-		return this.http.post(environment.apiUrl + '/users/register', user, { headers: headers }).map(res => res.json());
+		return this.http.post(environment.apiUrl + '/v1/register', user, { headers: headers }).map(res => res.json());
 	}
 
 	storeUserData(token, user) {
