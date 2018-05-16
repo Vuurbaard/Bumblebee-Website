@@ -28,13 +28,13 @@ export class RegisterComponent implements OnInit {
 		}
 
 		this.authenticationService.registerUser(user).toPromise().then(data => {
-			if (data.success) {
-				this.flashMessagesService.show('You are now register and can login', { cssClass: 'alert-success' });
-				this.router.navigate(['/login']);
-			}
-		}).catch(data => {
-			if(data.json().message) {
-				this.flashMessagesService.show(data.json().message, { cssClass: 'alert-danger' });
+
+			this.flashMessagesService.show('You are now register and can login', { cssClass: 'alert-success' });
+			this.router.navigate(['/login']);
+			
+		}).catch(err => {
+			if(err.json().message) {
+				this.flashMessagesService.show(err.json().message, { cssClass: 'alert-danger' });
 			}
 			else {
 				this.flashMessagesService.show('Something went wrong', { cssClass: 'alert-danger' });
