@@ -30,27 +30,30 @@ export class LoginComponent implements OnInit {
 		}
 
 		this.authService.authenticateUser(user).toPromise().then(data => {
-			if (data.success) {
-				this.authService.storeUserData(data.token, data.user);
-				this.flashMessagesService.show('You are now logged in', {
-					cssClass: 'alert-success',
-					timeout: 5000
-				});
 
-				if (this.redirectTo) {
-					this.router.navigate([this.redirectTo]);
-				}
-				else {
-					this.router.navigate(['/']);
-				}
-			}
-		}).catch(data => {
+			this.authService.storeUserData(data.token, data.user);
 
-			this.flashMessagesService.show('Username or password is incorrect', {
-				cssClass: 'alert-danger',
+			this.flashMessagesService.show('You are now logged in', {
+				cssClass: 'alert-success',
 				timeout: 5000
 			});
-			
+
+			if (this.redirectTo) {
+				this.router.navigate([this.redirectTo]);
+			}
+			else {
+				this.router.navigate(['/']);
+			}
+
+		}).catch(err => {
+
+			if (err.json().message) {
+				this.flashMessagesService.show(err.message, { cssClass: 'alert-danger' });
+			}
+			else {
+				this.flashMessagesService.show('Username or password is incorrect', { cssClass: 'alert-danger' });
+			}
+
 			this.router.navigate(['login']);
 		});
 	}
