@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 	wavesurfer: any;
 
 	loadedText: string = "";
-	text: string = "Please let this work";
+	text: string = "";
 	randomTexts: Array<string> = [
 		"Please let this work",
 		"I don't want to get some help",
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
 	autoPlay: Boolean = false;
 
 	constructor(private audioService: AudioService, private zone: NgZone) {
-
+		this.text = this.randomTexts[Math.floor(Math.random() * this.randomTexts.length)];
 	}
 
 	ngOnInit() {

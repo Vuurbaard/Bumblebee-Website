@@ -34,6 +34,7 @@ import { FragmentsComponent } from './pages/admin/fragments/fragments.component'
 import { WordsComponent } from './pages/admin/words/words.component';
 import { SourcesService } from './services/sources.service';
 import { HomeComponent } from './pages/home/home.component';
+import { ApiService } from './services/api.service';
 
 export function jwtOptionsFactory() {
 	return {
@@ -83,6 +84,7 @@ export function jwtOptionsFactory() {
 		AuthenticationService, 
 		AudioService,
 		SourcesService,
+		ApiService
 	],
 	bootstrap: [AppComponent]
 })

@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
 	constructor(public authenticationService: AuthenticationService) { }
 
 	ngOnInit() {
-		this.isAdmin =  this.authenticationService.user && this.authenticationService.user.isAdmin;
+		this.isAdmin =  this.authenticationService.user && this.authenticationService.hasRole('admin');
 	}
 	
 }
