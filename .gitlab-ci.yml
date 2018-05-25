@@ -1,6 +1,7 @@
 image: ubuntu:latest
 
 stages:
+ - prepare
  - build
  - test
  - deploy
