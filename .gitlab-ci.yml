@@ -54,5 +54,6 @@ push to production:
   environment:
     name: bumblebee-fm
     url: https://www.bumblebee.fm
+  dependencies: []
   only:
     - master
