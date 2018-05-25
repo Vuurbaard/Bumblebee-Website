@@ -2,7 +2,7 @@ version: '3'
 services:
  
     website:
-        image: ${CI_REGISTRY}/bumblebee/website:build-${CI_COMMIT_REF_SLUG}
+        image: ${CI_REGISTRY}/bumblebee/website:${CI_COMMIT_REF_SLUG}
         environment:
             - NODE_ENV=development
             - ANGULAR_ENV=prod
