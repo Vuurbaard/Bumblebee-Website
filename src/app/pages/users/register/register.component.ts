@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
 		// 	this.flashMessagesService.show('Please enter a valid email', { cssClass: 'alert-danger' });
 		// }
 
-		this.authenticationService.registerUser(user).subscribe(data => {
+		this.authenticationService.registerUser(user).toPromise().then(data => {
 			if (data.success) {
 				this.flashMessagesService.show('You are now register and can login', { cssClass: 'alert-success' });
 				this.router.navigate(['/login']);
@@ -45,6 +45,8 @@ export class RegisterComponent implements OnInit {
 				this.flashMessagesService.show('Something went wrong', { cssClass: 'alert-danger' });
 				this.router.navigate(['/register']);
 			}
+		}).catch(() => {
+			this.flashMessagesService.show('Something went wrong', { cssClass: 'alert-danger' });
 		});
 	}
 
