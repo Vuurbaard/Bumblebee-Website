@@ -35,6 +35,7 @@ import { WordsComponent } from './pages/admin/words/words.component';
 import { SourcesService } from './services/sources.service';
 import { HomeComponent } from './pages/home/home.component';
 import { ApiService } from './services/api.service';
+import { WordService } from './services/word.service';
 
 export function jwtOptionsFactory() {
 	return {
@@ -84,7 +85,8 @@ export function jwtOptionsFactory() {
 		AuthenticationService, 
 		AudioService,
 		SourcesService,
-		ApiService
+		ApiService,
+		WordService
 	],
 	bootstrap: [AppComponent]
 })

@@ -3,6 +3,7 @@ import { environment } from './../../../environments/environment';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Component, OnInit, NgZone } from '@angular/core';
+import { WordService } from '../../services/word.service';
 
 
 declare var WaveSurfer: any;
@@ -23,18 +24,20 @@ export class FragmentifierComponent implements OnInit {
 	end: Number;
 	isFragmenting: Boolean = false;
 	fragments: Array<any> = [];
-	url: string = "https://www.youtube.com/watch?v=9-yUbFi7VUY";
+	url: string = "";
 	playing: boolean = false;
 
 	// Gets returned from the API
 	sourceId: string;
 
-	constructor(private audioService: AudioService, private flashMessagesService: FlashMessagesService, private router: Router, private zone: NgZone) {
+	constructor(private audioService: AudioService, private flashMessagesService: FlashMessagesService, private router: Router, private zone: NgZone, private wordService: WordService) {
 
 	}
 
 	ngOnInit() {
 		var me = this;
+
+		//this.wordService.saveMultipleByTexts(['please', 'let', 'do', 'werk']);
 
 		this.wavesurfer = WaveSurfer.create({
 			container: '#waveform',
