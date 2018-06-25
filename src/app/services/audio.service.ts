@@ -11,7 +11,7 @@ export class AudioService extends ApiService {
 	}
 
 	download(url: string) {
-		return this.post('/audio/download', { 'url': url });
+		return this.post('/v1/audio/download', { 'url': url });
 	}
 
 	saveFragments(sourceId: string, fragments: Array<any>) {
