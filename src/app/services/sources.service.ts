@@ -13,7 +13,7 @@ export class SourcesService extends ApiService {
 	}
 
 	all() {
-		return this.get<ISource>('/sources');
+		return this.get<ISource>('/v1/source');
 	}
 
 }
