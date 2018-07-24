@@ -2,6 +2,7 @@ import { Http } from '@angular/http';
 import { AuthenticationService } from './authentication.service';
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
+import { WordService } from './word.service';
 
 @Injectable()
 export class AudioService extends ApiService {
@@ -11,11 +12,7 @@ export class AudioService extends ApiService {
 	}
 
 	download(url: string) {
-		return this.post('/v1/audio/download', { 'url': url });
-	}
-
-	saveFragments(sourceId: string, fragments: Array<any>) {
-		return this.post('/fragments', { sourceId: sourceId, fragments: fragments });
+		return this.post('/v1/audio/download', { 'url': url }).toPromise();
 	}
 
 	tts(text: string) {

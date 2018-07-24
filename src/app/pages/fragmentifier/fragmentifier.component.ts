@@ -1,9 +1,8 @@
 import { AudioService } from './../../services/audio.service';
 import { environment } from './../../../environments/environment';
-import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Component, OnInit, NgZone } from '@angular/core';
-import { WordService } from '../../services/word.service';
+import { FragmentService } from '../../services/fragment.service';
 
 
 declare var WaveSurfer: any;
@@ -24,13 +23,13 @@ export class FragmentifierComponent implements OnInit {
 	end: Number;
 	isFragmenting: Boolean = false;
 	fragments: Array<any> = [];
-	url: string = "";
+	url: string = "https://www.youtube.com/watch?v=Obgnr9pc820";
 	playing: boolean = false;
 
 	// Gets returned from the API
 	sourceId: string;
 
-	constructor(private audioService: AudioService, private flashMessagesService: FlashMessagesService, private router: Router, private zone: NgZone, private wordService: WordService) {
+	constructor(private audioService: AudioService, private flashMessagesService: FlashMessagesService, private zone: NgZone, private fragmentService: FragmentService) {
 
 	}
 
@@ -71,16 +70,16 @@ export class FragmentifierComponent implements OnInit {
 
 				// this.slider.value = 250;
 				// this.wavesurfer.zoom(this.slider.value);
-				
+
 				me.loading = false;
 
 				for (var fragment of this.fragments) {
-					this.wavesurfer.addRegion({ 
-						start: fragment.start, 
+					this.wavesurfer.addRegion({
+						start: fragment.start,
 						end: fragment.end,
 						drag: false,
-						color: "rgba(246, 168, 33, 0.25)" 
-					});					
+						color: "rgba(246, 168, 33, 0.25)"
+					});
 				}
 
 			});
@@ -102,7 +101,7 @@ export class FragmentifierComponent implements OnInit {
 		console.log('Downloading from url:', this.url);
 		this.loading = true;
 
-		this.audioService.download(this.url).subscribe(data => {
+		this.audioService.download(this.url).then(data => {
 			console.log('Downloaded:', data);
 			this.wavesurfer.load(environment.apiUrl + data.url);
 			this.sourceId = data.sourceId;
@@ -116,9 +115,13 @@ export class FragmentifierComponent implements OnInit {
 				}
 				this.fragments = fragments;
 
-				// var wat = this.wavesurfer.regions.list;
-				// debugger;
 			}
+		}).catch(err => {
+			this.loading = false;
+			this.flashMessagesService.show('Something went wrong trying to download the youtube video.', {
+				cssClass: 'alert-danger',
+				timeout: 5000
+			});
 		});
 	}
 
@@ -171,23 +174,18 @@ export class FragmentifierComponent implements OnInit {
 	}
 
 	save() {
-		//let id = this.youtube.replace('https://www.youtube.com/watch?v=', '');
 
-		this.audioService.saveFragments(this.sourceId, this.fragments).subscribe(data => {
-			if (data.success) {
-				this.flashMessagesService.show('Fragments are submitted for review! Thank you!', {
-					cssClass: 'alert-success',
-					timeout: 5000
-				});
-				// this.router.navigate(['dashboard']);
-				this.download();
-			}
-			else {
-				this.flashMessagesService.show(data.error, {
-					cssClass: 'alert-danger',
-					timeout: 5000
-				});
-			}
+		this.fragmentService.save(this.sourceId, this.fragments).then(data => {
+			this.flashMessagesService.show('Fragments are submitted for review! Thank you!', {
+				cssClass: 'alert-success',
+				timeout: 5000
+			});
+			this.download();
+		}).catch(err => {
+			this.flashMessagesService.show(err, {
+				cssClass: 'alert-danger',
+				timeout: 5000
+			});
 		});
 	}
 
