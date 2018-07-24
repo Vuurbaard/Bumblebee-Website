@@ -36,6 +36,7 @@ import { SourcesService } from './services/sources.service';
 import { HomeComponent } from './pages/home/home.component';
 import { ApiService } from './services/api.service';
 import { WordService } from './services/word.service';
+import { FragmentService } from './services/fragment.service';
 
 export function jwtOptionsFactory() {
 	return {
@@ -80,13 +81,14 @@ export function jwtOptionsFactory() {
 		ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
 	],
 	providers: [
-		AuthGuard, 
-		AdminGuard, 
-		AuthenticationService, 
+		AuthGuard,
+		AdminGuard,
+		AuthenticationService,
 		AudioService,
 		SourcesService,
 		ApiService,
-		WordService
+		WordService,
+		FragmentService
 	],
 	bootstrap: [AppComponent]
 })
