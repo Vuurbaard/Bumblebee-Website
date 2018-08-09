@@ -1,12 +1,9 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { AudioService } from '../../services/audio.service';
 import { environment } from './../../../environments/environment';
+import { FlashMessagesService } from '../../../../node_modules/angular2-flash-messages';
 
-// const WaveSurfer = require('wavesurfer.js');
-// import { WaveSurfer } from 'wavesurfer.js';
 declare var WaveSurfer: any;
-declare var TimelinePlugin: any;
-declare var MinimapPlugin: any;
 
 @Component({
 	selector: 'app-home',
@@ -17,19 +14,21 @@ export class HomeComponent implements OnInit {
 
 	wavesurfer: any;
 
+	fragments: any;
 	loadedText: string = "";
 	text: string = "";
 	randomTexts: Array<string> = [
-		"Please let this work",
-		"I don't want to get some help",
-		"Whatever it is it's not right on the teleprompter"
+		//"Please let this work",
+		//"I don't want to get some help",
+		//"Whatever it is it's not right on the teleprompter",
+		"ok what hi please let this work ok"
 	];
 
 	loading: Boolean = false;
 	playing: Boolean = false;
 	autoPlay: Boolean = false;
 
-	constructor(private audioService: AudioService, private zone: NgZone) {
+	constructor(private audioService: AudioService, private zone: NgZone, private flashMessagesService: FlashMessagesService) {
 		this.text = this.randomTexts[Math.floor(Math.random() * this.randomTexts.length)];
 	}
 
@@ -40,7 +39,8 @@ export class HomeComponent implements OnInit {
 			waveColor: 'white',
 			progressColor: '#f6a821',
 			plugins: [
-				WaveSurfer.regions.create()
+				WaveSurfer.regions.create(),
+				//WaveSurfer.cursor.create()
 			]
 		});
 
@@ -75,13 +75,27 @@ export class HomeComponent implements OnInit {
 		this.load(this.text);
 	}
 
-	load(text: string) {
+	async load(text: string) {
 		this.loading = true;
-		this.audioService.tts(text).subscribe(data => {
-			console.log('loading', data.file)
-			this.wavesurfer.load(environment.apiUrl + data.file);
-			this.loadedText = text;
-		});
+
+		try {
+			let data = await this.audioService.tts(text);
+
+			this.fragments = data.fragments;
+	
+			if (data.file) {
+				console.log('loading', data.file)
+				this.wavesurfer.load(environment.apiUrl + data.file);
+				this.loadedText = text;
+			}
+		}
+		catch(err) {
+			this.flashMessagesService.show('Something went wrong converting text to speech', {
+				cssClass: 'alert-danger',
+				timeout: 5000
+			});
+		}
+
 	}
 
 	play() {

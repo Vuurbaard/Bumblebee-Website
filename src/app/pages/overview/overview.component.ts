@@ -28,7 +28,7 @@ export class OverviewComponent implements OnInit {
 	concatFragmentWords(fragments: Array<IFragment>): string {
 		let concatted = "";
 
-		for (let fragment of fragments) {
+		for (let fragment of fragments.reverse()) {
 			if (fragment.word) {
 				concatted += fragment.word.text + " ";
 			}
