@@ -32,8 +32,6 @@ export class FragmentService extends ApiService {
 			return this.post('/v1/fragment', fragment).toPromise();
 		});
 
-		debugger;
-
 		try {
 			let newlyCreatedFragments = await Promise.all(promises);
 			console.log(newlyCreatedFragments);
@@ -41,9 +39,6 @@ export class FragmentService extends ApiService {
 		catch(err)  {
 			console.log(err);
 		}
-
-		//return this.post('/v1/fragments', { sourceId: sourceId, fragments: fragments });
 	}
-
-
+	
 }
