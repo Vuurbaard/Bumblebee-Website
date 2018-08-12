@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { AuthenticationService } from './authentication.service';
 import { Http } from '@angular/http';
-import { IWord } from '../models/word';
+import { IWord } from '../../models/word';
 
 
 @Injectable()

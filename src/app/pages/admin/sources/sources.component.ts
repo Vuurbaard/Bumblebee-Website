@@ -1,4 +1,4 @@
-import { SourcesService } from './../../../services/sources.service';
+import { SourcesService } from '../../../services/api/sources.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

@@ -1,8 +1,8 @@
-import { AudioService } from './../../services/audio.service';
-import { environment } from './../../../environments/environment';
+import { AudioService } from '../../services/api/audio.service';
+import { environment } from '../../../environments/environment
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Component, OnInit, NgZone } from '@angular/core';
-import { FragmentService } from '../../services/fragment.service';
+import { FragmentService } from '../../services/api/fragment.service';
 
 
 declare var WaveSurfer: any;
@@ -23,7 +23,8 @@ export class FragmentifierComponent implements OnInit {
 	end: Number;
 	isFragmenting: Boolean = false;
 	fragments: Array<any> = [];
-	url: string = "https://www.youtube.com/watch?v=Obgnr9pc820";
+	// url: string = "https://www.youtube.com/watch?v=Obgnr9pc820";
+	url: string = "";
 	playing: boolean = false;
 
 	// Gets returned from the API

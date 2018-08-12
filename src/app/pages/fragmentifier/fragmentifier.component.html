@@ -21,6 +21,13 @@
 			<div class="loader">
 				<div class="loader-bar"></div>
 			</div>
+			<!-- <form (submit)="download()">
+				<div class="form-group">
+					<label for="formGroupExampleInput">Url</label>
+					<input type="text" [(ngModel)]="url" class="form-control" name="urlInput" id="urlInput" placeholder="https://www.youtube.com/watch?v=9-yUbFi7VUY">
+					<button type="submit" class="btn btn-accent">Download</button>
+				</div>
+			</form> -->
 			<form (submit)="download()" class="form-horizontal">
 				<div class="form-group">
 					<label for="inputYouTube" class="col-lg-2 control-label">YouTube url</label>

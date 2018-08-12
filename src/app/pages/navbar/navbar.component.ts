@@ -1,6 +1,8 @@
 import { Router } from '@angular/router';
-import { Component, OnInit, Renderer } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
+import { Component, OnInit, Renderer, Output, EventEmitter } from '@angular/core';
+import { AuthenticationService } from '../../services/api/authentication.service';
+import { SidebarService } from '../../services/website/sidebar.service';
+
 @Component({
 	selector: 'app-navbar',
 	templateUrl: './navbar.component.html',
@@ -8,10 +10,9 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class NavbarComponent implements OnInit {
 
-	showMenu: boolean = true;
 	tts: string;
 
-	constructor(public authService: AuthenticationService, private router: Router, private renderer: Renderer) { }
+	constructor(public authService: AuthenticationService, private router: Router, private sidebarService: SidebarService) { }
 
 	ngOnInit() {
 	}
@@ -26,8 +27,7 @@ export class NavbarComponent implements OnInit {
 	}
 
 	toggleMenu() {
-		this.showMenu = !this.showMenu;
-		this.renderer.setElementClass(document.body, 'nav-toggle', this.showMenu);
+		this.sidebarService.toggle();
 	}
 
 }
