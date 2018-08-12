@@ -2,7 +2,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthenticationService {
@@ -45,7 +45,7 @@ export class AuthenticationService {
 		if(this.user && this.user.roles.includes(role)) {
 			return true;
 		}
-		
+
 		return false;
 	}
 

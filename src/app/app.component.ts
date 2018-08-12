@@ -1,4 +1,5 @@
-import { Component, Renderer } from '@angular/core';
+import { Component } from '@angular/core';
+import { SidebarService } from './services/website/sidebar.service';
 
 @Component({
 	selector: 'app-root',
@@ -6,27 +7,27 @@ import { Component, Renderer } from '@angular/core';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-	
-	constructor(private renderer: Renderer) {
+
+	constructor(private sidebarService: SidebarService) {
 
 	}
 
 	ngOnInit() {
-		if(window.innerWidth > 767) {
-			this.renderer.setElementClass(document.body, 'nav-toggle', true);
-		}
-		else {
-			this.renderer.setElementClass(document.body, 'nav-toggle', false);
-		}
-		
+		// if(window.innerWidth > 767) {
+		// 	this.sidebarService.show();
+		// }
+		// else {
+		// 	this.sidebarService.hide();
+		// }
+
 	}
 
 	swipe(event: any) {
 		if(event == "swipeleft" && window.innerWidth < 767) {
-			this.renderer.setElementClass(document.body, 'nav-toggle', false);
+			this.sidebarService.hide();
 		}
 		else if(event == "swiperight" && window.innerWidth < 767) {
-			this.renderer.setElementClass(document.body, 'nav-toggle', true);
+			this.sidebarService.show();
 		}
 	}
 }

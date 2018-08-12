@@ -1,6 +1,6 @@
-import { SourcesService } from './../../services/sources.service';
+import { SourcesService } from '../../services/api/sources.service';
 import { Component, OnInit } from '@angular/core';
-import { AudioService } from '../../services/audio.service';
+import { AudioService } from '../../services/api/audio.service';
 import { IFragment } from '../../models/fragment';
 
 @Component({

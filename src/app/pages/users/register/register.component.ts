@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../../services/authentication.service';
+import { AuthenticationService } from '../../../services/api/authentication.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
 			this.flashMessagesService.show('You are now register and can login', { cssClass: 'alert-success' });
 			this.router.navigate(['/login']);
-			
+
 		}).catch(err => {
 			if(err.json().message) {
 				this.flashMessagesService.show(err.json().message, { cssClass: 'alert-danger' });

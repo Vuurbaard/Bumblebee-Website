@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { AudioService } from '../../services/audio.service';
-import { environment } from './../../../environments/environment';
-import { FlashMessagesService } from '../../../../node_modules/angular2-flash-messages';
+import { AudioService } from '../../services/api/audio.service';
+import { environment } from '../../../environments/environment
+import { FlashMessagesService } from 'angular2-flash-messages
 
 declare var WaveSurfer: any;
 
@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
 			let data = await this.audioService.tts(text);
 
 			this.fragments = data.fragments;
-	
+
 			if (data.file) {
 				console.log('loading', data.file)
 				this.wavesurfer.load(environment.apiUrl + data.file);

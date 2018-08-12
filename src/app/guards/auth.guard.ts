@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../services/api/authentication.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
 				cssClass: 'alert-danger',
 				timeout: 5000
 			});
-			
+
 			return false;
 		}
 	}

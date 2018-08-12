@@ -1,9 +1,9 @@
 import { ApiService } from './api.service';
-import { environment } from './../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Http, Headers } from '@angular/http';
 import { AuthenticationService } from './authentication.service';
 import { Injectable } from '@angular/core';
-import { ISource } from '../models/source';
+import { ISource } from '../../models/source';
 
 @Injectable()
 export class SourcesService extends ApiService {
