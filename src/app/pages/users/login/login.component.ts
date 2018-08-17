@@ -1,7 +1,8 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { AuthenticationService } from './../../../services/authentication.service';
+import { AuthenticationService } from '../../../services/api/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SidebarService } from '../../../services/website/sidebar.service';
 
 @Component({
 	selector: 'app-login',
@@ -14,12 +15,12 @@ export class LoginComponent implements OnInit {
 	password: string;
 	redirectTo: string;
 
-	constructor(private authService: AuthenticationService, private router: Router, private route: ActivatedRoute, private flashMessagesService: FlashMessagesService) { }
+	constructor(private authService: AuthenticationService, private router: Router, private route: ActivatedRoute, private flashMessagesService: FlashMessagesService, private sidebarService: SidebarService) { }
 
 	ngOnInit() {
 		this.route.params.subscribe(params => {
 			this.redirectTo = params['redirect'];
-			console.log('should redirect to', this.redirectTo);
+			//console.log('should redirect to', this.redirectTo);
 		});
 	}
 
@@ -29,29 +30,34 @@ export class LoginComponent implements OnInit {
 			password: this.password
 		}
 
-		this.authService.authenticateUser(user).subscribe(data => {
-			if (data.success) {
-				this.authService.storeUserData(data.token, data.user);
-				this.flashMessagesService.show('You are now logged in', {
-					cssClass: 'alert-success',
-					timeout: 5000
-				});
+		this.authService.authenticateUser(user).toPromise().then(data => {
 
-				if (this.redirectTo) {
-					this.router.navigate([this.redirectTo]);
-				}
-				else {
-					this.router.navigate(['/']);
-				}
+			this.authService.storeUserData(data.token, data.user);
 
+			this.flashMessagesService.show('You are now logged in', {
+				cssClass: 'alert-success',
+				timeout: 5000
+			});
+
+			this.sidebarService.show();
+
+			if (this.redirectTo) {
+				this.router.navigate([this.redirectTo]);
 			}
 			else {
-				this.flashMessagesService.show(data.msg, {
-					cssClass: 'alert-danger',
-					timeout: 5000
-				});
-				this.router.navigate(['login']);
+				this.router.navigate(['/']);
 			}
+
+		}).catch(err => {
+
+			if (err.json().message) {
+				this.flashMessagesService.show(err.message, { cssClass: 'alert-danger' });
+			}
+			else {
+				this.flashMessagesService.show('Username or password is incorrect', { cssClass: 'alert-danger' });
+			}
+
+			this.router.navigate(['login']);
 		});
 	}
 }
