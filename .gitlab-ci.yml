@@ -50,7 +50,7 @@ push to production:
   script:
     - echo $CI_ENVIRONMENT_SLUG
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.mijnproject.nu
-    - docker stack deploy --with-registry-auth --compose-file=docker-stack-compose.yml ${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}
+    - docker stack deploy --prune --resolve-image=always --with-registry-auth --compose-file=docker-stack-compose.yml ${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}
   environment:
     name: bumblebee-fm
     url: https://www.bumblebee.fm
