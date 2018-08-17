@@ -1,4 +1,4 @@
-import { environment } from '../../../environments/environment
+import { environment } from '../../../environments/environment';
 import { AudioService } from '../../services/api/audio.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';

@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { AudioService } from '../../services/api/audio.service';
-import { environment } from '../../../environments/environment
-import { FlashMessagesService } from 'angular2-flash-messages
+import { environment } from '../../../environments/environment';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 declare var WaveSurfer: any;
 
