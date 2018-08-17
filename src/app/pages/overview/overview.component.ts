@@ -1,6 +1,6 @@
-import { SourcesService } from './../../services/sources.service';
+import { SourcesService } from '../../services/api/sources.service';
 import { Component, OnInit } from '@angular/core';
-import { AudioService } from '../../services/audio.service';
+import { AudioService } from '../../services/api/audio.service';
 import { IFragment } from '../../models/fragment';
 
 @Component({
@@ -28,7 +28,7 @@ export class OverviewComponent implements OnInit {
 	concatFragmentWords(fragments: Array<IFragment>): string {
 		let concatted = "";
 
-		for (let fragment of fragments) {
+		for (let fragment of fragments.reverse()) {
 			if (fragment.word) {
 				concatted += fragment.word.text + " ";
 			}
