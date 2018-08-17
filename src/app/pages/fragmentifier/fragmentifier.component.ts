@@ -1,5 +1,5 @@
 import { AudioService } from '../../services/api/audio.service';
-import { environment } from '../../../environments/environment
+import { environment } from '../../../environments/environment';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FragmentService } from '../../services/api/fragment.service';
