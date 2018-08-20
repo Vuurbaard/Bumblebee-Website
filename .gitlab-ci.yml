@@ -1,18 +1,43 @@
 image: ubuntu:latest
 
 stages:
+ - prepare
  - build
  - test
  - deploy
 
+
+# Retrieve all dependencies using composer
+# This uses hirak/prestissimo to improve retrieval speeds
+prepare dependencies:
+  image: node:9
+  stage: prepare
+  script:
+    - npm install -g @angular/cli
+    - npm install
+    - ng build --prod
+  cache:
+    key: "cache-$CI_COMMIT_REF_SLUG-npm"
+    paths:
+     - node_modules/
+  artifacts:
+    name: "$CI_COMMIT_SHA-build"
+    untracked: false
+    expire_in: 1 week
+    paths:
+     - dist/
+
 build website:
   image: docker:dind
+  stage: build
   script:
     # install composer and get dependencies
     - echo $CI_ENVIRONMENT_SLUG
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.mijnproject.nu
-    - docker build -t ${CI_REGISTRY}/bumblebee/website:build-${CI_COMMIT_REF_SLUG} --build-arg NPM_INSTALL_BEFORE=true --build-arg DOCKER_SRC=./docker/  -f docker/Dockerfile ./
-    - docker push ${CI_REGISTRY}/bumblebee/website:build-${CI_COMMIT_REF_SLUG}
+    - docker build -t ${CI_REGISTRY}/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_SLUG} --build-arg NPM_INSTALL_BEFORE=true --build-arg DOCKER_SRC=./docker/  -f docker/Dockerfile ./
+    - docker push ${CI_REGISTRY}/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_SLUG}
+  dependencies:
+    - prepare dependencies
 
 
 # Push the image to Docker Swarm as service and run a rolling deploy
@@ -25,9 +50,10 @@ push to production:
   script:
     - echo $CI_ENVIRONMENT_SLUG
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.mijnproject.nu
-    - docker stack deploy --with-registry-auth --compose-file=docker-stack-compose.yml ${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}
+    - docker stack deploy --prune --resolve-image=always --with-registry-auth --compose-file=docker-stack-compose.yml ${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}
   environment:
     name: bumblebee-fm
     url: https://www.bumblebee.fm
+  dependencies: []
   only:
     - master

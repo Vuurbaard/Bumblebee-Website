@@ -29,7 +29,6 @@
 		"./scripts/bootstrap/bootstrap.js",
 		"../node_modules/wavesurfer.js/dist/wavesurfer.js",
 		"../node_modules/wavesurfer.js/dist/plugin/wavesurfer.regions.js"
-		
 	  ],
       "environmentSource": "environments/environment.ts",
       "environments": {

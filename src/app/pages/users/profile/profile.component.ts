@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../../services/api.service';
+import { ApiService } from '../../../services/api/api.service';
 import { IUser } from '../../../models/user';
-import { AuthenticationService } from '../../../services/authentication.service';
+import { AuthenticationService } from '../../../services/api/authentication.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
 	ngOnInit() {
 		this.loading = true;
 		this.apiService.get<IUser>('/users/' + this.authenticationService.user.id).toPromise().then(user => {
-			//this.apiService.get<IUser>('/users/' + '5adb1b79c8e89101e2c7b577').toPromise().then(user => { 
+			//this.apiService.get<IUser>('/users/' + '5adb1b79c8e89101e2c7b577').toPromise().then(user => {
 			this.loading = false;
 			this.user = user;
 			console.log(user);
