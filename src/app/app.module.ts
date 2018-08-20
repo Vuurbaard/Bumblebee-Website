@@ -1,7 +1,7 @@
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthenticationService } from './services/authentication.service';
+import { AuthenticationService } from './services/api/authentication.service';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -24,7 +24,7 @@ import { OverviewComponent } from './pages/overview/overview.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HttpModule } from '@angular/http';
 import { FlashMessagesModule } from 'angular2-flash-messages';
-import { AudioService } from './services/audio.service';
+import { AudioService } from './services/api/audio.service';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { ProfileComponent } from './pages/users/profile/profile.component';
 import { TtsComponent } from './pages/tts/tts.component';
@@ -32,9 +32,12 @@ import { UsersComponent } from './pages/admin/users/users.component';
 import { SourcesComponent } from './pages/admin/sources/sources.component';
 import { FragmentsComponent } from './pages/admin/fragments/fragments.component';
 import { WordsComponent } from './pages/admin/words/words.component';
-import { SourcesService } from './services/sources.service';
+import { SourcesService } from './services/api/sources.service';
 import { HomeComponent } from './pages/home/home.component';
-import { ApiService } from './services/api.service';
+import { ApiService } from './services/api/api.service';
+import { WordService } from './services/api/word.service';
+import { FragmentService } from './services/api/fragment.service';
+import { SidebarService } from './services/website/sidebar.service';
 
 export function jwtOptionsFactory() {
 	return {
@@ -79,12 +82,15 @@ export function jwtOptionsFactory() {
 		ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
 	],
 	providers: [
-		AuthGuard, 
-		AdminGuard, 
-		AuthenticationService, 
+		AuthGuard,
+		AdminGuard,
+		AuthenticationService,
 		AudioService,
 		SourcesService,
-		ApiService
+		ApiService,
+		WordService,
+		FragmentService,
+		SidebarService
 	],
 	bootstrap: [AppComponent]
 })
