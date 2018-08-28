@@ -3519,11 +3519,11 @@ app-fragmentifier i.fa.fa-play {
 	user-select: text !important;
 }
 
-@media (max-width: 767px) {
-	.selectable {
-		user-select: none !important;
-	}
-}
+// @media (max-width: 767px) {
+// 	.selectable {
+// 		user-select: none !important;
+// 	}
+// }
 
 .table-filter {
 	text-align: right;
