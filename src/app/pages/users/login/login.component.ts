@@ -48,13 +48,18 @@ export class LoginComponent implements OnInit {
 				this.router.navigate(['/']);
 			}
 
-		}).catch(err => {
+		}).catch(res => {
 
-			if (err.json().message) {
-				this.flashMessagesService.show(err.message, { cssClass: 'alert-danger' });
+			if(res.ok) {
+				if (res.json().message) {
+					this.flashMessagesService.show(res.message, { cssClass: 'alert-danger' });
+				}
+			}
+			else if(res.status == 401) {
+				this.flashMessagesService.show('Username or password is incorrect.', { cssClass: 'alert-danger' });
 			}
 			else {
-				this.flashMessagesService.show('Username or password is incorrect', { cssClass: 'alert-danger' });
+				this.flashMessagesService.show('Something went wrong.', { cssClass: 'alert-danger' });
 			}
 
 			this.router.navigate(['login']);
