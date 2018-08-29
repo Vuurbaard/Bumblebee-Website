@@ -42,8 +42,10 @@ export class AuthenticationService {
 
 	hasRole(role: string) : boolean {
 
-		if(this.user && this.user.roles.includes(role)) {
-			return true;
+		if(this.user && this.user.roles) {
+			if(this.user.roles.includes(role)) {
+				return true;
+			}
 		}
 
 		return false;

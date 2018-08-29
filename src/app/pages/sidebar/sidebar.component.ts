@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Renderer, EventEmitter, Output, HostListener } from '@angular/core';
 import { AuthenticationService } from '../../services/api/authentication.service';
 import { SidebarService } from '../../services/website/sidebar.service';
 
@@ -11,6 +11,8 @@ export class SidebarComponent implements OnInit {
 
 	isVisible: boolean = false;
 	isAdmin: boolean = false;
+	windowWidth: number = window.innerWidth;
+	windowHeight: number = window.innerHeight;
 
 	constructor(public authenticationService: AuthenticationService, private renderer: Renderer, private sidebarService: SidebarService) { }
 
@@ -24,9 +26,30 @@ export class SidebarComponent implements OnInit {
 			this.isVisible = visibility;
 		});
 
-		if(this.authenticationService.isLoggedIn()) {
+		if (window.innerWidth > 767 && this.authenticationService.isLoggedIn()) {
 			this.sidebarService.show();
 		}
+		else {
+			this.sidebarService.hide();
+		}
 
+	}
+
+	@HostListener('window:resize', ['$event'])
+	onResize(event) {
+		
+		if(event.target.innerWidth <= this.windowWidth && window.innerWidth < 767) {
+			if(this.sidebarService.visibility) {
+				this.sidebarService.hide();
+			}
+		}
+		if(event.target.innerWidth >= this.windowWidth && window.innerWidth > 767) {
+			if(!this.sidebarService.visibility) {
+				this.sidebarService.show();
+			}
+		}
+
+		this.windowWidth = event.target.innerWidth;
+		this.windowHeight = event.target.innerHeight;
 	}
 }
