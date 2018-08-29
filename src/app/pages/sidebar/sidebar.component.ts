@@ -20,8 +20,6 @@ export class SidebarComponent implements OnInit {
 		this.isAdmin = this.authenticationService.user && this.authenticationService.hasRole('admin');
 
 		this.sidebarService.visibility.subscribe(visibility => {
-			console.log(visibility);
-
 			this.renderer.setElementClass(document.body, 'nav-toggle', visibility);
 			this.isVisible = visibility;
 		});
