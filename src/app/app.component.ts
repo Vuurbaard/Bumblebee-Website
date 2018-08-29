@@ -13,12 +13,6 @@ export class AppComponent {
 	}
 
 	ngOnInit() {
-		// if(window.innerWidth > 767) {
-		// 	this.sidebarService.show();
-		// }
-		// else {
-		// 	this.sidebarService.hide();
-		// }
 
 	}
 
