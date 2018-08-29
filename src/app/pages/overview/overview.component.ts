@@ -29,6 +29,10 @@ export class OverviewComponent implements OnInit {
 
 		let concatted = "";
 
+		fragments.sort(function (a, b) {
+			return Number(a.start) - Number(b.start);
+		});
+
 		for (let fragment of fragments) {
 			if (fragment.word) {
 				concatted += fragment.word.text + " ";
