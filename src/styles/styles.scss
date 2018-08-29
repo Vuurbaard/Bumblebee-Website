@@ -1109,7 +1109,8 @@ body {
 			display: none;
 		}
 
-		.navbar .navbar-brand {
+		.navbar .navbar-brand,
+		.navbar .navbar-brand:focus {
 			width: 140px;
 			background-color: #f6a821;
 			height: 60px;
