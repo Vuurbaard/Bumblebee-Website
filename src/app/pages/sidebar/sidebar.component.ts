@@ -50,4 +50,8 @@ export class SidebarComponent implements OnInit {
 		this.windowWidth = event.target.innerWidth;
 		this.windowHeight = event.target.innerHeight;
 	}
+
+	close() {
+		this.sidebarService.hide();
+	}
 }

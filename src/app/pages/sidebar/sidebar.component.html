@@ -10,10 +10,10 @@
 			<li class="nav-category">
 				Audio
 			</li>
-			<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+			<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="close()">
 				<a [routerLink]="['/fragmentifier']">Fragmentifier</a>
 			</li>
-			<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+			<li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="close()">
 				<a [routerLink]="['/overview']">Overview</a>
 			</li>
 
@@ -28,16 +28,16 @@
 					</span>
 				</a>
 				<ul id="databaseviews" class="nav nav-second collapse" aria-expanded="false" style="height: 0px;">
-					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="close()">
 						<a [routerLink]="['/admin/users']">Users</a>
 					</li>
-					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="close()">
 						<a [routerLink]="['/admin/sources']">Sources</a>
 					</li>
-					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="close()">
 						<a [routerLink]="['/admin/fragments']">Fragments</a>
 					</li>
-					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="close()">
 						<a [routerLink]="['/admin/words']">Words</a>
 					</li>
 				</ul>
