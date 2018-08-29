@@ -1055,6 +1055,7 @@ body {
 }
 
 @media (min-width: 767px) {
+
 	.navigation {
 		margin-top: 60px;
 		background-color: transparentize(#24262d, .3);
@@ -1106,6 +1107,21 @@ body {
 
 		.navigation {
 			display: none;
+		}
+
+		.navbar .navbar-brand {
+			width: 140px;
+			background-color: #f6a821;
+			height: 60px;
+			padding: 20px 10px;
+			font-weight: 400;
+			letter-spacing: 2px;
+			color: #FFFFFF;
+			text-align: center;
+		}
+
+		#mobile-menu .left-nav-toggle {
+			padding: 9px 10px 8px 16px;
 		}
 
 		&.nav-toggle {
