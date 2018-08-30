@@ -52,6 +52,8 @@ export class SidebarComponent implements OnInit {
 	}
 
 	close() {
-		this.sidebarService.hide();
+		if(window.innerWidth < 767) {
+			this.sidebarService.hide();
+		}
 	}
 }
