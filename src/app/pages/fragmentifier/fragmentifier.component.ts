@@ -102,7 +102,7 @@ export class FragmentifierComponent implements OnInit {
 		console.log('Downloading from url:', this.url);
 		this.loading = true;
 
-		this.audioService.download(this.url).then(data => {
+		this.audioService.download(this.url).then((data: any) => {
 			console.log('Downloaded:', data);
 			this.wavesurfer.load(environment.apiUrl + data.url);
 			this.sourceId = data.sourceId;

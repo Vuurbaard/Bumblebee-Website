@@ -1,6 +1,5 @@
 import { SourcesService } from '../../services/api/sources.service';
 import { Component, OnInit } from '@angular/core';
-import { AudioService } from '../../services/api/audio.service';
 import { IFragment } from '../../models/fragment';
 
 @Component({
@@ -18,7 +17,7 @@ export class OverviewComponent implements OnInit {
 	ngOnInit() {
 		this.loading = true;
 
-		this.sourcesService.all().subscribe(data => {
+		this.sourcesService.all().then(data => {
 			console.log(data);
 			this.sources = data;
 			this.loading = false;

@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
 
 
 		this.loading = true;
-		this.apiService.get<IUser>('/v1/user/' + this.authenticationService.user._id).toPromise().then(user => {
+		this.apiService.get<IUser>('/v1/user/' + this.authenticationService.user._id).then(user => {
 			this.loading = false;
 			this.user = user;
 			console.log(user);
@@ -55,11 +55,11 @@ export class ProfileComponent implements OnInit {
 
 	save() {
 
-		this.apiService.patch('/v1/user/' + this.user._id, {
+		this.apiService.patch<IUser>('/v1/user/' + this.user._id, {
 			name: this.user.name,
 			email: this.user.email,
 			avatar: this.user.avatar,
-		}).toPromise().then(updatedUser => {
+		}).then(updatedUser => {
 			this.flashMessagesService.show('Profile successfully updated!', {
 				cssClass: 'alert-success',
 				timeout: 5000
@@ -80,28 +80,20 @@ export class ProfileComponent implements OnInit {
 
 	changePassword() {
 
-		this.apiService.post('/v1/user/' + this.user._id + '/changepassword', {
+		this.apiService.post<IUser>('/v1/user/' + this.user._id + '/changepassword', {
 			currentPassword: this.changePasswordModel.currentPassword,
 			newPassword: this.changePasswordModel.newPassword,
 			confirmPassword: this.changePasswordModel.confirmPassword,
-		}).toPromise().then((res) => {
+		}).then(user => {
 
-			if (res.error) {
-				this.flashMessagesService.show(res.error, {
-					cssClass: 'alert-danger',
-					timeout: 5000
-				});
-			}
-			else {
-				this.flashMessagesService.show('Password successfully changed!', {
-					cssClass: 'alert-success',
-					timeout: 5000
-				});
+			this.flashMessagesService.show('Password successfully changed!', {
+				cssClass: 'alert-success',
+				timeout: 5000
+			});
 
-				this.changePasswordModel.currentPassword = "";
-				this.changePasswordModel.newPassword = "";
-				this.changePasswordModel.confirmPassword = "";
-			}
+			this.changePasswordModel.currentPassword = "";
+			this.changePasswordModel.newPassword = "";
+			this.changePasswordModel.confirmPassword = "";
 
 		}).catch(err => {
 			this.flashMessagesService.show(err, {

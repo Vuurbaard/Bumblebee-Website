@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 			password: this.password
 		}
 
-		this.authService.authenticateUser(user).toPromise().then(data => {
+		this.authService.authenticateUser(user).toPromise().then((data: any) => {
 
 			this.authService.storeUserData(data.token, data.user);
 

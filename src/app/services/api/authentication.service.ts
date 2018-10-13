@@ -1,13 +1,13 @@
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthenticationService {
 
-	constructor(private http: Http, private jwtHelper: JwtHelperService) {
+	constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
 	}
 
 	logout() {
@@ -16,17 +16,17 @@ export class AuthenticationService {
 	}
 
 	authenticateUser(user) {
-		let headers = new Headers();
+		let headers = new HttpHeaders();
 		headers.append('Content-Type', 'application/json');
 
-		return this.http.post(environment.apiUrl + '/v1/login', user, { headers: headers }).map(res => res.json());
+		return this.http.post(environment.apiUrl + '/v1/login', user, { headers: headers });
 	}
 
 	registerUser(user) {
-		let headers = new Headers();
+		let headers = new HttpHeaders();
 		headers.append('Content-Type', 'application/json');
 
-		return this.http.post(environment.apiUrl + '/v1/register', user, { headers: headers }).map(res => res.json());
+		return this.http.post(environment.apiUrl + '/v1/register', user, { headers: headers });
 	}
 
 	storeUserData(token, user) {
@@ -40,10 +40,10 @@ export class AuthenticationService {
 		return token != null && !this.jwtHelper.isTokenExpired(token);
 	}
 
-	hasRole(role: string) : boolean {
+	hasRole(role: string): boolean {
 
-		if(this.user && this.user.roles) {
-			if(this.user.roles.includes(role)) {
+		if (this.user && this.user.roles) {
+			if (this.user.roles.includes(role)) {
 				return true;
 			}
 		}

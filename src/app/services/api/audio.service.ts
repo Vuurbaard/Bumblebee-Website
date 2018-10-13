@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
@@ -6,7 +6,7 @@ import { ApiService } from './api.service';
 @Injectable()
 export class AudioService extends ApiService {
 
-	constructor(authenticationService: AuthenticationService, http: Http) {
+	constructor(authenticationService: AuthenticationService, http: HttpClient) {
 		super(authenticationService, http);
 	}
 
@@ -15,13 +15,13 @@ export class AudioService extends ApiService {
 	];
 
 	download(url: string) {
-		return this.post('/v1/audio/download', { 'url': url }).toPromise();
+		return this.post('/v1/audio/download', { 'url': url });
 	}
 
 	async tts(text: string) {
 		console.log("tts:", text);
 
-		let data = await this.post('/v1/tts', { text: text }).toPromise();
+		let data = await this.post<any>('/v1/tts', { text: text });
 
 		if (data.fragments) {
 			for (let index in data.fragments) {

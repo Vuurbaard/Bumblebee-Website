@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { AuthenticationService } from './authentication.service';
 import { WordService } from './word.service';
@@ -7,7 +7,7 @@ import { WordService } from './word.service';
 @Injectable()
 export class FragmentService extends ApiService {
 
-	constructor(authenticationService: AuthenticationService, http: Http, private wordService: WordService) {
+	constructor(authenticationService: AuthenticationService, http: HttpClient, private wordService: WordService) {
 		super(authenticationService, http);
 	}
 
@@ -29,7 +29,7 @@ export class FragmentService extends ApiService {
 		});
 
 		let promises = fragments.map(fragment => {
-			return this.post('/v1/fragment', fragment).toPromise();
+			return this.post('/v1/fragment', fragment);
 		});
 
 		try {
@@ -40,5 +40,5 @@ export class FragmentService extends ApiService {
 			console.log(err);
 		}
 	}
-	
+
 }

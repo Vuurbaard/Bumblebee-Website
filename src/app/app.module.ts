@@ -1,6 +1,6 @@
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
-import { Routes, RouterModule } from '@angular/router';
+
 import { AuthenticationService } from './services/api/authentication.service';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -42,7 +42,7 @@ import { SidebarService } from './services/website/sidebar.service';
 export function jwtOptionsFactory() {
 	return {
 		tokenGetter: () => {
-			return localStorage.get('access_token');
+			return localStorage.getItem('access_token');
 		}
 	}
 }

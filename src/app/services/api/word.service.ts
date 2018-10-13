@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { AuthenticationService } from './authentication.service';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { IWord } from '../../models/word';
 
 
 @Injectable()
 export class WordService extends ApiService {
 
-	constructor(authenticationService: AuthenticationService, http: Http) {
+	constructor(authenticationService: AuthenticationService, http: HttpClient) {
 		super(authenticationService, http);
 	}
 
@@ -24,7 +24,7 @@ export class WordService extends ApiService {
 
 		// Map the input array to GET requests
 		let promises = texts.map(text => {
-			return this.getByText(text).toPromise();
+			return this.getByText(text);
 		});
 
 		// Execute all GET requests
@@ -37,7 +37,7 @@ export class WordService extends ApiService {
 		let nonExistingWords = texts.filter(text => {
 			return existingWords.filter(word => word.text == text).length == 0;
 		}).map(text => {
-			return this.createNew(text).toPromise()
+			return this.createNew(text)
 		});
 
 		let newlyCreatedWords = await Promise.all(nonExistingWords);

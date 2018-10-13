@@ -1,5 +1,6 @@
 import { SourcesService } from '../../../services/api/sources.service';
 import { Component, OnInit } from '@angular/core';
+import { ISource } from '../../../models/source';
 
 @Component({
 	selector: 'app-sources',
@@ -8,16 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SourcesComponent implements OnInit {
 
-	sources: [any];
+	sources: [ISource];
 	pagesize: number = 25;
 	page: number = 0;
 
 	constructor(private sourcesService : SourcesService) { }
 
 	ngOnInit() {
-		this.sourcesService.all().subscribe(data => {
-			console.log(data);
-			this.sources = data;
+		this.sourcesService.all().then(sources => {
+			console.log(sources);
+			this.sources = sources;
 		});
 	}
 
