@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from '../../../../node_modules/rxjs/Observable';
-import { Observer } from '../../../../node_modules/rxjs/Observer';
+import { Observable } from 'rxjs';
+import { Observer } from 'rxjs';
 
 @Injectable()
 export class SidebarService {
