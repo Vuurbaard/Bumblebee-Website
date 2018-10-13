@@ -16,7 +16,7 @@ import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { JwtModule } from '@auth0/angular-jwt';
 import { RegisterComponent } from './pages/users/register/register.component';
 import { LoginComponent } from './pages/users/login/login.component';
 import { FragmentifierComponent } from './pages/fragmentifier/fragmentifier.component';
@@ -38,14 +38,6 @@ import { ApiService } from './services/api/api.service';
 import { WordService } from './services/api/word.service';
 import { FragmentService } from './services/api/fragment.service';
 import { SidebarService } from './services/website/sidebar.service';
-
-export function jwtOptionsFactory() {
-	return {
-		tokenGetter: () => {
-			return localStorage.getItem('access_token');
-		}
-	}
-}
 
 @NgModule({
 	declarations: [
@@ -74,9 +66,11 @@ export function jwtOptionsFactory() {
 		HttpClientModule,
 		FlashMessagesModule.forRoot(),
 		JwtModule.forRoot({
-			jwtOptionsProvider: {
-				provide: JWT_OPTIONS,
-				useFactory: jwtOptionsFactory
+			config: {
+				tokenGetter: () => {
+					return localStorage.getItem('access_token');
+				},
+				whitelistedDomains: ['localhost', 'localhost:4200', 'api.bumblebee.fm', 'bumblebee.fm']
 			}
 		}),
 		ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
