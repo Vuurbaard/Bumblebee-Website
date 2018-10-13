@@ -64,7 +64,7 @@ export function jwtOptionsFactory() {
 		SourcesComponent,
 		FragmentsComponent,
 		WordsComponent,
-		HomeComponent
+		HomeComponent,
 	],
 	imports: [
 		BrowserModule,

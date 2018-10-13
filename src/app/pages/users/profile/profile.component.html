@@ -21,20 +21,36 @@
 				<div class="loader">
 					<div class="loader-bar"></div>
 				</div>
-				<form novalidate>
+
+				<form novalidate > <!-- [formGroup]="myForm" -->
+					<!-- <div class="form-group" [ngClass]="{
+						 'has-danger': email.invalid && (email.dirty || email.touched),
+						 'has-success': email.valid && (email.dirty || email.touched)
+					}">
+						<label>Email</label>
+						<input type="email" class="form-control" formControlName="email" required>
+						<div class="form-control-feedba	ck" *ngIf="email.errors && (email.dirty || email.touched)">
+							<p *ngIf="email.errors.required">Email is required</p>
+							<p *ngIf="password.errors.pattern">The email address must contain at least the @ character</p>
+						</div>
+					</div> -->
+
 					<div class="form-group">
 						<label for="username">Username</label>
-						<input type="text" name="username" class="form-control" id="username" placeholder="Enter your username here" readonly [(ngModel)]="user.username">
+						<input type="text" name="username" class="form-control" id="username" placeholder="Enter your username here"
+						 readonly [(ngModel)]="user.username">
 					</div>
 
 					<div class="form-group">
 						<label for="name">Name</label>
 						<input type="text" name="name" class="form-control" id="name" placeholder="Enter your name here" [(ngModel)]="user.name">
+						<!--  -->
 					</div>
 
 					<div class="form-group">
 						<label for="email">Email</label>
-						<input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter your emailadres here" [(ngModel)]="user.email">
+						<input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter your emailadres here"
+						 [(ngModel)]="user.email">
 					</div>
 
 					<button type="submit" class="btn btn-accent" (click)="save()">Save</button>
@@ -46,6 +62,7 @@
 
 <br />
 
+<!--
 <div *ngIf="user" class="fluid-container">
 	<div class="col-lg-12">
 		<div class="view-header">
@@ -89,4 +106,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->

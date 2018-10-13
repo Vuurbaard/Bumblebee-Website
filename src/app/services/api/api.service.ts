@@ -24,4 +24,8 @@ export class ApiService {
 	public post(relativeUrl: string, data: any) {
 		return this.http.post(environment.apiUrl + relativeUrl, data, { headers: this.defaultHeaders() }).map(res => res.json());
 	}
+
+	public patch(relativeUrl: string, data: any) {
+		return this.http.patch(environment.apiUrl + relativeUrl, data, { headers: this.defaultHeaders() }).map(res => res.json());
+	}
 }

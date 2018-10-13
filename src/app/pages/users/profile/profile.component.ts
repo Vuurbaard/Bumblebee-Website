@@ -3,6 +3,7 @@ import { ApiService } from '../../../services/api/api.service';
 import { IUser } from '../../../models/user';
 import { AuthenticationService } from '../../../services/api/authentication.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-profile',
@@ -15,6 +16,7 @@ export class ProfileComponent implements OnInit {
 
 	user: IUser;
 	loading: Boolean = false;
+	myForm: FormGroup;
 
 	changePasswordModel: any = {
 		currentPassword: "",
@@ -23,22 +25,37 @@ export class ProfileComponent implements OnInit {
 	}
 
 	ngOnInit() {
+
+		this.myForm = new FormGroup({
+			name: new FormGroup({
+				firstName: new FormControl('', Validators.required),
+				lastName: new FormControl('', Validators.required),
+			}),
+			email: new FormControl('', [
+				Validators.required,
+				Validators.pattern("[^ @]*@[^ @]*")
+			]),
+			password: new FormControl('', [
+				Validators.minLength(8),
+				Validators.required
+			]),
+		});
+
+
 		this.loading = true;
-		this.apiService.get<IUser>('/users/' + this.authenticationService.user.id).toPromise().then(user => {
-			//this.apiService.get<IUser>('/users/' + '5adb1b79c8e89101e2c7b577').toPromise().then(user => {
+		this.apiService.get<IUser>('/v1/user/' + this.authenticationService.user._id).toPromise().then(user => {
 			this.loading = false;
 			this.user = user;
 			console.log(user);
-		})
-			.catch(err => {
-				this.loading = false;
-				console.log(err);
-			});
+		}).catch(err => {
+			this.loading = false;
+			console.log(err);
+		});
 	}
 
 	save() {
 
-		this.apiService.post('/users/' + this.user._id, {
+		this.apiService.patch('/v1/user/' + this.user._id, {
 			name: this.user.name,
 			email: this.user.email,
 			avatar: this.user.avatar,
@@ -63,7 +80,7 @@ export class ProfileComponent implements OnInit {
 
 	changePassword() {
 
-		this.apiService.post('/users/' + this.user._id + '/changepassword', {
+		this.apiService.post('/v1/user/' + this.user._id + '/changepassword', {
 			currentPassword: this.changePasswordModel.currentPassword,
 			newPassword: this.changePasswordModel.newPassword,
 			confirmPassword: this.changePasswordModel.confirmPassword,
