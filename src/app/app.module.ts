@@ -39,6 +39,11 @@ import { WordService } from './services/api/word.service';
 import { FragmentService } from './services/api/fragment.service';
 import { SidebarService } from './services/website/sidebar.service';
 
+
+export function tokenGetter() {
+	return localStorage.getItem('access_token');
+}
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -67,9 +72,7 @@ import { SidebarService } from './services/website/sidebar.service';
 		FlashMessagesModule.forRoot(),
 		JwtModule.forRoot({
 			config: {
-				tokenGetter: () => {
-					return localStorage.getItem('access_token');
-				},
+				tokenGetter: tokenGetter,
 				whitelistedDomains: ['localhost:3000', 'localhost:4200', 'api.bumblebee.fm', 'bumblebee.fm'],
 				authScheme: ""
 			}
