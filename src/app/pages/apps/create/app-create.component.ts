@@ -11,12 +11,16 @@ export class AppCreateComponent implements OnInit {
 	constructor() { }
 
 	appForm: FormGroup;
-
 	loading: Boolean = false;
+
 	ngOnInit() {
 		this.appForm = new FormGroup({
 			name: new FormControl('', Validators.required),
 		});
+	}
+
+	create() {
+		// Nope.
 	}
 
 }

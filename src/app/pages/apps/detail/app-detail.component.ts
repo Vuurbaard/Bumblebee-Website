@@ -15,8 +15,4 @@ export class AppDetailComponent implements OnInit {
 	ngOnInit() {
 
 	}
-
-	create() {
-		// Nope.
-	}
 }
