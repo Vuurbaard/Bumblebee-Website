@@ -56,6 +56,14 @@ body.hide-menu #menu:before {
     display: inline-block;
 }
 
+.panel-body.no-results {
+	text-align: center;
+    i.pe {
+		font-size: 60px;
+		color: #f6a821;
+	}
+}
+
 .flash-messages {
     position: fixed;
     z-index: 99999;
@@ -1598,7 +1606,9 @@ li.profil-link>a {
 }
 
 .panel>.panel-heading {
-    color: #ffffff;
+	color: #ffffff;
+	font-weight: 600;
+	font-size: 16px;
 }
 
 .panel-tools {

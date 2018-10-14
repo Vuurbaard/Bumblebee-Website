@@ -17,32 +17,15 @@
 				<a [routerLink]="['/overview']">Overview</a>
 			</li>
 
-			<li class="nav-category" [hidden]="!isAdmin">
-				Admin
+			<li class="nav-category" [hidden]="!authenticationService.isLoggedIn()">
+				Account
 			</li>
-			<li [hidden]="!isAdmin">
-				<a href="#databaseviews" data-toggle="collapse" aria-expanded="false" class="collapsed" aria-controls="databaseviews">
-					Databaseviews
-					<span class="sub-nav-icon">
-						<i class="stroke-arrow"></i>
-					</span>
-				</a>
-				<ul id="databaseviews" class="nav nav-second collapse" aria-expanded="false" style="height: 0px;">
-					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="close()">
-						<a [routerLink]="['/admin/users']">Users</a>
-					</li>
-					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="close()">
-						<a [routerLink]="['/admin/sources']">Sources</a>
-					</li>
-					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="close()">
-						<a [routerLink]="['/admin/fragments']">Fragments</a>
-					</li>
-					<li [hidden]="!isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="close()">
-						<a [routerLink]="['/admin/words']">Words</a>
-					</li>
-				</ul>
+			<li [hidden]="!authenticationService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="close()">
+				<a *ngIf="authenticationService.user" [routerLink]="['/user/' + authenticationService.user._id]">Profile</a>
 			</li>
-
+			<li [hidden]="!authenticationService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="close()">
+				<a *ngIf="authenticationService.user" [routerLink]="['/user/'+ authenticationService.user._id + '/app']">Apps</a>
+			</li>
 
 			<li class="nav-info">
 				<a class="platform-logo discord" href="https://discordapp.com/oauth2/authorize?client_id=312659661776093185&permissions=0&scope=bot"

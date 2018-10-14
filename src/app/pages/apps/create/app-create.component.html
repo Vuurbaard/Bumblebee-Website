@@ -1,0 +1,36 @@
+<div class="fluid-container">
+
+	<div class="view-header">
+		<div class="header-icon">
+			<i class="pe page-header-icon pe-7s-plug"></i>
+		</div>
+		<div class="header-title">
+			<h3 class="m-b-xs">New app</h3>
+			<small>
+				Again, this is only really useful if you are a developer and are writing your own implementation of Bumblebee
+			</small>
+		</div>
+	</div>
+	<hr>
+
+	<div class="col-md-12">
+		<div class="panel panel-filled" [class.ld-loading]="loading">
+			<div class="panel-heading">App</div>
+			<div class="panel-body">
+				<div class="loader">
+					<div class="loader-bar"></div>
+				</div>
+				<form novalidate [formGroup]="appForm">
+
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input formControlName="name" type="text" name="name" class="form-control" placeholder="Enter the name of your app here">
+					</div>
+
+					<button type="submit" class="btn btn-accent" (click)="create()">Create</button>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>

@@ -2,7 +2,7 @@ import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 
 import { AuthenticationService } from './services/api/authentication.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -17,8 +17,6 @@ import { SidebarComponent } from './pages/sidebar/sidebar.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
-import { RegisterComponent } from './pages/users/register/register.component';
-import { LoginComponent } from './pages/users/login/login.component';
 import { FragmentifierComponent } from './pages/fragmentifier/fragmentifier.component';
 import { OverviewComponent } from './pages/overview/overview.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -26,18 +24,21 @@ import { HttpModule } from '@angular/http';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AudioService } from './services/api/audio.service';
 import { OrderByPipe } from './pipes/order-by.pipe';
-import { ProfileComponent } from './pages/users/profile/profile.component';
 import { TtsComponent } from './pages/tts/tts.component';
-import { UsersComponent } from './pages/admin/users/users.component';
-import { SourcesComponent } from './pages/admin/sources/sources.component';
-import { FragmentsComponent } from './pages/admin/fragments/fragments.component';
-import { WordsComponent } from './pages/admin/words/words.component';
 import { SourcesService } from './services/api/sources.service';
 import { HomeComponent } from './pages/home/home.component';
 import { ApiService } from './services/api/api.service';
 import { WordService } from './services/api/word.service';
 import { FragmentService } from './services/api/fragment.service';
 import { SidebarService } from './services/website/sidebar.service';
+import { LoginComponent } from './pages/authentication/login/login.component';
+import { RegisterComponent } from './pages/authentication/register/register.component';
+
+import { UserOverviewComponent } from './pages/users/overview/user-overview.component';
+import { UserDetailComponent } from './pages/users/detail/user-detail.component';
+import { AppOverviewComponent } from './pages/apps/overview/app-overview.component';
+import { AppDetailComponent } from './pages/apps/detail/app-detail.component';
+import { AppCreateComponent } from './pages/apps/create/app-create.component';
 
 
 export function tokenGetter() {
@@ -55,18 +56,19 @@ export function tokenGetter() {
 		OverviewComponent,
 		DashboardComponent,
 		OrderByPipe,
-		ProfileComponent,
+		UserDetailComponent,
 		TtsComponent,
-		UsersComponent,
-		SourcesComponent,
-		FragmentsComponent,
-		WordsComponent,
 		HomeComponent,
+		UserOverviewComponent,
+		AppOverviewComponent,
+		AppDetailComponent,
+		AppCreateComponent,
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		FormsModule,
+		ReactiveFormsModule,
 		HttpModule,
 		HttpClientModule,
 		FlashMessagesModule.forRoot(),

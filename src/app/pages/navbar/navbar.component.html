@@ -11,7 +11,7 @@
 					</a>
 				</div>
 				<li *ngIf="authService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class=" profil-link">
-					<a [routerLink]="['/profile']">
+					<a [routerLink]="['/user/' + authService.user._id]">
 						<img *ngIf="!authService.user.avatar" src="https://public.acloud.guru/assets/profile-no-image.png" class="img-circle" alt="">
 						<img *ngIf="authService.user.avatar" src="{{authService.user.avatar}}" class="img-circle" alt="">
 					</a>
@@ -39,7 +39,7 @@
 			</div>
 			<ul class="nav navbar-nav navbar-left">
 				<li *ngIf="authService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class=" profil-link">
-					<a [routerLink]="['/profile']">
+					<a [routerLink]="['/user/' + authService.user._id]">
 						<img *ngIf="!authService.user.avatar" src="https://public.acloud.guru/assets/profile-no-image.png" class="img-circle" alt="">
 						<img *ngIf="authService.user.avatar" src="{{authService.user.avatar}}" class="img-circle" alt="">
 						<span *ngIf="authService.user.name" class="profile-address">{{authService.user.name}}</span>
