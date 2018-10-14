@@ -10,8 +10,13 @@ export class AppDetailComponent implements OnInit {
 
 	constructor( private activeRoute: ActivatedRoute) { }
 
+	loading: Boolean = false;
+
 	ngOnInit() {
 
 	}
 
+	create() {
+		// Nope.
+	}
 }

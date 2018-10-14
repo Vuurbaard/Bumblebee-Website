@@ -12,6 +12,7 @@ export class AppOverviewComponent implements OnInit {
 
 	constructor(private apiService: ApiService, private activeRoute: ActivatedRoute) { }
 
+	loading: Boolean = false;
 	apps: Array<IApp>;
 
 	ngOnInit() {

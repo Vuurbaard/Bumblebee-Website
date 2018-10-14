@@ -11,6 +11,7 @@ export class UserOverviewComponent implements OnInit {
 
 	constructor(private apiService: ApiService) { }
 
+	loading: Boolean = false;
 	users: [IUser];
 
 	ngOnInit() {
