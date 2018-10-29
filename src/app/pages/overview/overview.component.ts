@@ -1,6 +1,7 @@
 import { SourcesService } from '../../services/api/sources.service';
 import { Component, OnInit } from '@angular/core';
 import { IFragment } from '../../models/fragment';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
 	selector: 'app-overview',
@@ -9,7 +10,7 @@ import { IFragment } from '../../models/fragment';
 })
 export class OverviewComponent implements OnInit {
 
-	constructor(private sourcesService: SourcesService) { }
+	constructor(private sourcesService: SourcesService, private flashMessagesService: FlashMessagesService) { }
 
 	loading: Boolean = false;
 	sources: [any];
@@ -21,6 +22,8 @@ export class OverviewComponent implements OnInit {
 			console.log(data);
 			this.sources = data;
 			this.loading = false;
+		}).catch(err => {
+			this.flashMessagesService.show("Something went wrong", { cssClass: 'alert-danger', timeout: 5000 });
 		});
 	}
 

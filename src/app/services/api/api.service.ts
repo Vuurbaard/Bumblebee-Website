@@ -28,4 +28,8 @@ export class ApiService {
 	public patch<T>(relativeUrl: string, data: any) {
 		return this.http.patch<T>(environment.apiUrl + relativeUrl, data, { headers: this.defaultHeaders() }).toPromise();
 	}
+
+	public delete<T>(relativeUrl: string) {
+		return this.http.delete<T>(environment.apiUrl + relativeUrl, { headers: this.defaultHeaders() }).toPromise();
+	}
 }

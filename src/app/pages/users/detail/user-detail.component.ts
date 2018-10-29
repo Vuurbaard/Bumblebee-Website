@@ -52,7 +52,7 @@ export class UserDetailComponent implements OnInit {
 			});
 
 		}).catch(err => {
-			this.loading = false;
+			this.flashMessagesService.show("Something went wrong", { cssClass: 'alert-danger', timeout: 5000 });
 		});
 	}
 

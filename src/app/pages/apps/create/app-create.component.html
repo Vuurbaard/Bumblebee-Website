@@ -20,16 +20,21 @@
 				<div class="loader">
 					<div class="loader-bar"></div>
 				</div>
-				<form novalidate [formGroup]="appForm">
-
+				<form novalidate [formGroup]="appForm" class="form-horizontal">
 					<div class="form-group">
-						<label for="name">Name</label>
-						<input formControlName="name" type="text" name="name" class="form-control" placeholder="Enter the name of your app here">
+						<label for="name" class="col-lg-2 control-label">Name</label>
+						<div class="col-lg-10">
+							<input formControlName="name" type="text" name="name" class="form-control" placeholder="Enter the name of your app here">
+						</div>
 					</div>
 
-					<button type="submit" class="btn btn-accent" (click)="create()">Create</button>
+					<div class="form-group">
+						<div class="col-lg-10 col-lg-offset-2">
+							<button type="submit" class="btn btn-accent" (click)="create()">Create</button>
+							<button type="submit" class="btn btn-default" [routerLink]="['..']">Cancel</button>
+						</div>
+					</div>
 				</form>
-
 			</div>
 		</div>
 	</div>

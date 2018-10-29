@@ -39,6 +39,7 @@ import { UserDetailComponent } from './pages/users/detail/user-detail.component'
 import { AppOverviewComponent } from './pages/apps/overview/app-overview.component';
 import { AppDetailComponent } from './pages/apps/detail/app-detail.component';
 import { AppCreateComponent } from './pages/apps/create/app-create.component';
+import { AppService } from './services/api/app.service';
 
 
 export function tokenGetter() {
@@ -90,6 +91,7 @@ export function tokenGetter() {
 		ApiService,
 		WordService,
 		FragmentService,
+		AppService,
 		SidebarService
 	],
 	bootstrap: [AppComponent]

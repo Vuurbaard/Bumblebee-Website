@@ -20,6 +20,41 @@
 				<div class="loader">
 					<div class="loader-bar"></div>
 				</div>
+
+				<form (ngSubmit)="save()" [formGroup]="appForm" class="form-horizontal">
+					<div class="form-group">
+						<label for="name" class="col-lg-2 control-label">Name</label>
+						<div class="col-lg-10">
+							<input formControlName="name" type="text" name="name" class="form-control" id="name" placeholder="Name"
+							 [readonly]="!editing" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+							<div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+								<div *ngIf="f.name.errors.required">Name is required</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="token" class="col-lg-2 control-label">Access token</label>
+						<div class="col-lg-10">
+							<input formControlName="token" type="text" name="token" class="form-control" id="token" placeholder="Token"
+							 readonly="readonly">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-lg-10 col-lg-offset-2 buttons-margin">
+							<div>
+								<button *ngIf="!editing" type="submit" class="btn btn-accent" (click)="edit()">Edit</button>
+								<button *ngIf="!editing" type="button" class="btn btn-default" [routerLink]="['..']">Go back</button>
+								<button *ngIf="editing" type="submit" class="btn btn-accent">Save</button>
+								<button *ngIf="editing" type="submit" class="btn btn-default" (click)="cancel()">Cancel</button>
+								<button *ngIf="!editing" type="button" class="btn btn-danger pull-right" (click)="delete()">Delete</button>
+							</div>
+
+						</div>
+					</div>
+
+				</form>
+
 			</div>
 		</div>
 	</div>

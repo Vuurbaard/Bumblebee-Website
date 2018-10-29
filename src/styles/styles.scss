@@ -3557,3 +3557,23 @@ app-fragmentifier i.fa.fa-play {
 .table-filter {
 	text-align: right;
 }
+
+.invalid-feedback {
+	color: #db524b;
+}
+
+.is-invalid {
+	border: 1px solid #db524b;
+}
+
+.btn {
+	margin-right: 5px;
+
+	&.pull-right {
+		margin-right: 0px;
+	}
+}
+
+.panel.ld-loading .panel-body {
+	min-height: 100px;
+}
