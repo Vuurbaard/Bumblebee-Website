@@ -165,7 +165,14 @@ export class FragmentifierComponent implements OnInit {
 	}
 
 	removeFragment(fragment) {
-		this.fragments.splice(this.fragments.indexOf(fragment), 1);
+		if(!fragment.id) {
+			this.fragments.splice(this.fragments.indexOf(fragment), 1);
+		}
+		else {
+			this.fragmentService.delete('/v1/fragment/' + fragment.id).then(() => {
+				this.fragments.splice(this.fragments.indexOf(fragment), 1);
+			});
+		}
 	}
 
 	playFragment(fragment) {

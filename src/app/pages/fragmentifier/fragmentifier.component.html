@@ -98,7 +98,7 @@
 						<input type="text" class="form-control" [(ngModel)]="fragment.word.text">
 
 						<span class="input-group-btn">
-							<button class="btn btn-danger text-danger" type="button" (click)="removeFragment(fragment)" [hidden]="fragment.id" [attr.disabled]="fragment.id">
+							<button class="btn btn-danger text-danger" type="button" (click)="removeFragment(fragment)" > <!-- [hidden]="fragment.id" [attr.disabled]="fragment.id" -->
 								<i class="fa fa-trash-o" aria-hidden="true"></i>
 							</button>
 						</span>
