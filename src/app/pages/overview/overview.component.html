@@ -26,7 +26,8 @@
 					<table class="table table-striped table-hover" role="grid">
 						<thead>
 							<tr role="row">
-								<th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 166px;">Source</th>
+								<th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 35px;" >Source</th>
+								<th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 166px;">Name</th>
 								<th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 265px;">Sentence</th>
 							</tr>
 						</thead>
@@ -37,6 +38,7 @@
 										<i class="fa fa-youtube"></i>
 									</a>
 								</td>
+								<td>{{ source.name }}</td>
 								<td>
 									<span>{{concatFragmentWords(source.fragments)}}</span>
 								</td>

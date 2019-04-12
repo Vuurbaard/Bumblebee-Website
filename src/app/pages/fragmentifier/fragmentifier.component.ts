@@ -24,7 +24,7 @@ export class FragmentifierComponent implements OnInit {
 	isFragmenting: Boolean = false;
 	fragments: Array<any> = [];
 	// url: string = "https://www.youtube.com/watch?v=Obgnr9pc820";
-	url: string = "";
+	public url: string = "";
 	playing: boolean = false;
 
 	// Gets returned from the API
