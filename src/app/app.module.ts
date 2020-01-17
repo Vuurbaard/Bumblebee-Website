@@ -20,7 +20,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { FragmentifierComponent } from './pages/fragmentifier/fragmentifier.component';
 import { OverviewComponent } from './pages/overview/overview.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { HttpModule } from '@angular/http';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AudioService } from './services/api/audio.service';
 import { OrderByPipe } from './pipes/order-by.pipe';
@@ -70,7 +69,6 @@ export function tokenGetter() {
 		AppRoutingModule,
 		FormsModule,
 		ReactiveFormsModule,
-		HttpModule,
 		HttpClientModule,
 		FlashMessagesModule.forRoot(),
 		JwtModule.forRoot({

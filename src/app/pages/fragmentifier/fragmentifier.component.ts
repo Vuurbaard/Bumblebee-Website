@@ -35,7 +35,7 @@ export class FragmentifierComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		var me = this;
+		const me = this;
 
 		//this.wordService.saveMultipleByTexts(['please', 'let', 'do', 'werk']);
 
@@ -43,6 +43,10 @@ export class FragmentifierComponent implements OnInit {
 			container: '#waveform',
 			waveColor: 'white',
 			progressColor: '#f6a821',
+			partialRender: true,
+			maxCanvasWidth: 1250,
+			minPxPerSec: 30,
+			pixelRatio: 1,
 			plugins: [
 				WaveSurfer.regions.create()
 			]
@@ -74,7 +78,7 @@ export class FragmentifierComponent implements OnInit {
 
 				me.loading = false;
 
-				for (var fragment of this.fragments) {
+				for (let fragment of this.fragments) {
 					this.wavesurfer.addRegion({
 						start: fragment.start,
 						end: fragment.end,
@@ -89,7 +93,7 @@ export class FragmentifierComponent implements OnInit {
 		this.slider = document.querySelector('#slider');
 
 		this.slider.oninput = function () {
-			var zoomLevel = Number(me.slider.value);
+			const zoomLevel = Number(me.slider.value);
 			me.wavesurfer.zoom(zoomLevel);
 		};
 	}
@@ -108,9 +112,9 @@ export class FragmentifierComponent implements OnInit {
 			this.sourceId = data.sourceId;
 			this.downloaded = true;
 			if (data.fragments) {
-				var fragments = new Array();
+				let fragments = new Array();
 
-				for (var fragment of data.fragments) {
+				for (let fragment of data.fragments) {
 					fragments.push({ id: fragment._id, word: fragment.word, start: fragment.start, end: fragment.end });
 					this.wavesurfer.addRegion({ start: fragment.start, end: fragment.end, color: "rgba(246, 168, 33, 0.5)" });
 				}
