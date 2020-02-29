@@ -3,9 +3,10 @@ import { environment } from '../../../environments/environment';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FragmentService } from '../../services/api/fragment.service';
+import * as _ from "lodash";
 
 
-declare var WaveSurfer: any;
+declare let WaveSurfer: any;
 
 @Component({
 	selector: 'app-fragmentifier',
@@ -44,8 +45,8 @@ export class FragmentifierComponent implements OnInit {
 			waveColor: 'white',
 			progressColor: '#f6a821',
 			partialRender: true,
-			maxCanvasWidth: 1250,
-			minPxPerSec: 30,
+			maxCanvasWidth: 250,
+			minPxPerSec: 20,
 			pixelRatio: 1,
 			plugins: [
 				WaveSurfer.regions.create()
@@ -77,25 +78,24 @@ export class FragmentifierComponent implements OnInit {
 				// this.wavesurfer.zoom(this.slider.value);
 
 				me.loading = false;
-
-				for (let fragment of this.fragments) {
+				this.fragments.forEach((fragment) => {
 					this.wavesurfer.addRegion({
 						start: fragment.start,
 						end: fragment.end,
 						drag: false,
 						color: "rgba(246, 168, 33, 0.25)"
 					});
-				}
-
+				})
 			});
 		});
 
 		this.slider = document.querySelector('#slider');
 
-		this.slider.oninput = function () {
+		this.slider.oninput = _.debounce(() => {
 			const zoomLevel = Number(me.slider.value);
 			me.wavesurfer.zoom(zoomLevel);
-		};
+		}, 150)
+
 	}
 
 	ngOnDestroy() {
@@ -180,8 +180,8 @@ export class FragmentifierComponent implements OnInit {
 	}
 
 	playFragment(fragment) {
-		var start = Number(fragment.start);
-		var end = Number(fragment.end);
+		const start = Number(fragment.start);
+		const end = Number(fragment.end);
 		this.wavesurfer.play(start, end);
 	}
 
@@ -203,7 +203,7 @@ export class FragmentifierComponent implements OnInit {
 
 	adjust(fragment: any, property: string, direction: string) {
 
-		let adjustBy = 0.01;
+		const adjustBy = 0.01;
 
 		if (property == "start" && direction == "up" && (fragment.start + adjustBy) < fragment.end) {
 			fragment.start += adjustBy;
