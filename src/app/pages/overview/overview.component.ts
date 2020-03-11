@@ -13,18 +13,46 @@ export class OverviewComponent implements OnInit {
 	constructor(private sourcesService: SourcesService, private flashMessagesService: FlashMessagesService) { }
 
 	loading: Boolean = false;
+	_sources: [any];
 	sources: [any];
+
+	search: string = "";
 
 	ngOnInit() {
 		this.loading = true;
 
 		this.sourcesService.all().then(data => {
-			console.log(data);
+			this._sources = data;
 			this.sources = data;
 			this.loading = false;
 		}).catch(err => {
 			this.flashMessagesService.show("Something went wrong", { cssClass: 'alert-danger', timeout: 5000 });
 		});
+	}
+
+	applySearch(search : string)
+	{
+		const vm = this;
+		
+		let words = search.split(' ');
+
+		if(search.length === 0){
+			this.sources = Object.assign([], this._sources);
+		} else {
+			this.sources = this._sources.filter(function(item) {
+				let counter = 0;
+				
+				item['fragments'].forEach(element => {
+					words.forEach(search => {
+						if(element['word'] != null && element['word']['text'].includes(search)){
+							counter++;
+						}						
+					});
+				});
+				return counter == words.length;
+			}) as [any];
+
+		}
 	}
 
 	concatFragmentWords(fragments: Array<IFragment>): string {
