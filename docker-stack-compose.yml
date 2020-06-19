@@ -1,0 +1,25 @@
+version: '3'
+services:
+ 
+    website:
+        image: ${CI_REGISTRY}/bumblebee/website:${CI_COMMIT_REF_SLUG}
+        environment:
+            - NODE_ENV=development
+            - ANGULAR_ENV=prod
+            - USE_NODEMON=false
+            - NPM_INSTALL_AFTER=false
+            - NG_OPTIONAL=--prod
+        ports:
+            - 8280:80
+        depends_on:
+            - api
+        deploy:
+            restart_policy:
+                condition: any
+                delay: 5s
+                max_attempts: 3
+                window: 120s
+            replicas: 1
+            update_config:
+                parallelism: 2
+                delay: 10s
