@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit, Renderer, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Renderer2 } from '@angular/core';
 import { AuthenticationService } from '../../services/api/authentication.service';
 import { SidebarService } from '../../services/website/sidebar.service';
 

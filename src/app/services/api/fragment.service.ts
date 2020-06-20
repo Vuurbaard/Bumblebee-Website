@@ -14,8 +14,8 @@ export class FragmentService extends ApiService {
 	public async save(sourceId: string, fragments: Array<any>) {
 
 		// First try to save all the words
-		let texts = fragments.map(fragment => {	return fragment.word.text; });
-		let words = await this.wordService.saveMultipleByTexts(texts);
+		const texts = fragments.map(fragment =>	fragment.word.text);
+		const words = await this.wordService.saveMultipleByTexts(texts);
 
 		fragments = fragments.map(fragment => {
 
@@ -28,15 +28,14 @@ export class FragmentService extends ApiService {
 			return fragment;
 		});
 
-		let promises = fragments.map(fragment => {
+		const promises = fragments.map(fragment => {
 			return this.post('/v1/fragment', fragment);
 		});
 
 		try {
-			let newlyCreatedFragments = await Promise.all(promises);
+			const newlyCreatedFragments = await Promise.all(promises);
 			console.log(newlyCreatedFragments);
-		}
-		catch(err)  {
+		} catch (err)  {
 			console.log(err);
 		}
 	}

@@ -17,7 +17,7 @@ export class TtsComponent implements OnInit {
 	constructor(private route: ActivatedRoute, private audioService: AudioService) { }
 
 	ngOnInit() {
-		var me = this;
+		const me = this;
 
 		this.wavesurfer = WaveSurfer.create({
 			container: '#waveform-tts',
@@ -29,16 +29,16 @@ export class TtsComponent implements OnInit {
 			me.wavesurfer.play();
 		});
 
-		var tts = this.route.snapshot.params['text'];
+		const tts = this.route.snapshot.params['text'];
 		if (tts) {
 			this.load(tts);
 		}
 	}
 
 	async load(text: string) {
-		let data = await this.audioService.tts(text);
+		const data = await this.audioService.tts(text);
 
-		console.log('loading', data.file)
+		console.log('loading', data.file);
 		this.wavesurfer.load(environment.apiUrl + data.file);
 
 	}

@@ -17,10 +17,9 @@ export class AppComponent {
 	}
 
 	swipe(event: any) {
-		if(event == "swipeleft" && window.innerWidth < 767) {
+		if (event == 'swipeleft' && window.innerWidth < 767) {
 			this.sidebarService.hide();
-		}
-		else if(event == "swiperight" && window.innerWidth < 767) {
+		} else if (event == 'swiperight' && window.innerWidth < 767) {
 			this.sidebarService.show();
 		}
 	}

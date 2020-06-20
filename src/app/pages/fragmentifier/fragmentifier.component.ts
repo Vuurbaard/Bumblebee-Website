@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FragmentService } from '../../services/api/fragment.service';
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
 
 declare let WaveSurfer: any;
@@ -25,8 +25,8 @@ export class FragmentifierComponent implements OnInit {
 	isFragmenting: Boolean = false;
 	fragments: Array<any> = [];
 	// url: string = "https://www.youtube.com/watch?v=Obgnr9pc820";
-	public url: string = "";
-	playing: boolean = false;
+	public url = '';
+	playing = false;
 
 	// Gets returned from the API
 	sourceId: string;
@@ -38,7 +38,7 @@ export class FragmentifierComponent implements OnInit {
 	ngOnInit() {
 		const me = this;
 
-		//this.wordService.saveMultipleByTexts(['please', 'let', 'do', 'werk']);
+		// this.wordService.saveMultipleByTexts(['please', 'let', 'do', 'werk']);
 
 		this.wavesurfer = WaveSurfer.create({
 			container: '#waveform',
@@ -83,9 +83,9 @@ export class FragmentifierComponent implements OnInit {
 						start: fragment.start,
 						end: fragment.end,
 						drag: false,
-						color: "rgba(246, 168, 33, 0.25)"
+						color: 'rgba(246, 168, 33, 0.25)'
 					});
-				})
+				});
 			});
 		});
 
@@ -94,7 +94,7 @@ export class FragmentifierComponent implements OnInit {
 		this.slider.oninput = _.debounce(() => {
 			const zoomLevel = Number(me.slider.value);
 			me.wavesurfer.zoom(zoomLevel);
-		}, 150)
+		}, 150);
 
 	}
 
@@ -112,11 +112,11 @@ export class FragmentifierComponent implements OnInit {
 			this.sourceId = data.sourceId;
 			this.downloaded = true;
 			if (data.fragments) {
-				let fragments = new Array();
+				const fragments = new Array();
 
-				for (let fragment of data.fragments) {
+				for (const fragment of data.fragments) {
 					fragments.push({ id: fragment._id, word: fragment.word, start: fragment.start, end: fragment.end });
-					this.wavesurfer.addRegion({ start: fragment.start, end: fragment.end, color: "rgba(246, 168, 33, 0.5)" });
+					this.wavesurfer.addRegion({ start: fragment.start, end: fragment.end, color: 'rgba(246, 168, 33, 0.5)' });
 				}
 				this.fragments = fragments;
 
@@ -158,21 +158,20 @@ export class FragmentifierComponent implements OnInit {
 			this.end = this.wavesurfer.backend.getCurrentTime();
 			this.isFragmenting = false;
 
-			let fragment = {
+			const fragment = {
 				start: this.start,
 				end: this.end,
-				word: { text: "" },
-			}
+				word: { text: '' },
+			};
 
 			this.fragments.push(fragment);
 		}
 	}
 
 	removeFragment(fragment) {
-		if(!fragment.id) {
+		if (!fragment.id) {
 			this.fragments.splice(this.fragments.indexOf(fragment), 1);
-		}
-		else {
+		} else {
 			this.fragmentService.delete('/v1/fragment/' + fragment.id).then(() => {
 				this.fragments.splice(this.fragments.indexOf(fragment), 1);
 			});
@@ -205,16 +204,13 @@ export class FragmentifierComponent implements OnInit {
 
 		const adjustBy = 0.01;
 
-		if (property == "start" && direction == "up" && (fragment.start + adjustBy) < fragment.end) {
+		if (property == 'start' && direction == 'up' && (fragment.start + adjustBy) < fragment.end) {
 			fragment.start += adjustBy;
-		}
-		else if (property == "start" && direction == "down" && (fragment.start - adjustBy) < fragment.end) {
+		} else if (property == 'start' && direction == 'down' && (fragment.start - adjustBy) < fragment.end) {
 			fragment.start -= 0.01;
-		}
-		else if (property == "end" && direction == "up" && (fragment.end + adjustBy) > fragment.start) {
+		} else if (property == 'end' && direction == 'up' && (fragment.end + adjustBy) > fragment.start) {
 			fragment.end += 0.01;
-		}
-		else if (property == "end" && direction == "down" && (fragment.end - adjustBy) > fragment.start) {
+		} else if (property == 'end' && direction == 'down' && (fragment.end - adjustBy) > fragment.start) {
 			fragment.end -= 0.01;
 		}
 	}

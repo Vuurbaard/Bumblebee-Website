@@ -15,13 +15,13 @@ export class HomeComponent implements OnInit {
 	wavesurfer: any;
 
 	fragments: any;
-	loadedText: string = "";
-	text: string = "";
+	loadedText = '';
+	text = '';
 	randomTexts: Array<string> = [
-		//"Please let this work",
-		//"I don't want to get some help",
-		//"Whatever it is it's not right on the teleprompter",
-		"ok what hi please let this work ok"
+		// "Please let this work",
+		// "I don't want to get some help",
+		// "Whatever it is it's not right on the teleprompter",
+		'ok what hi please let this work ok'
 	];
 
 	loading: Boolean = false;
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
 			progressColor: '#f6a821',
 			plugins: [
 				WaveSurfer.regions.create(),
-				//WaveSurfer.cursor.create()
+				// WaveSurfer.cursor.create()
 			]
 		});
 
@@ -79,17 +79,16 @@ export class HomeComponent implements OnInit {
 		this.loading = true;
 
 		try {
-			let data = await this.audioService.tts(text);
+			const data = await this.audioService.tts(text);
 
 			this.fragments = data.fragments;
 
 			if (data.file) {
-				console.log('loading', data.file)
+				console.log('loading', data.file);
 				this.wavesurfer.load(environment.apiUrl + data.file);
 				this.loadedText = text;
 			}
-		}
-		catch(err) {
+		} catch (err) {
 			this.flashMessagesService.show('Something went wrong converting text to speech', {
 				cssClass: 'alert-danger',
 				timeout: 5000
@@ -102,8 +101,7 @@ export class HomeComponent implements OnInit {
 		if (this.loadedText != this.text) {
 			this.autoPlay = true;
 			this.load(this.text);
-		}
-		else {
+		} else {
 			this.wavesurfer.play();
 		}
 	}

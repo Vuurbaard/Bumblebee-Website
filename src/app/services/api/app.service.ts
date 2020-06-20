@@ -22,7 +22,7 @@ export class AppService extends ApiService {
 	}
 
 	edit(id: string, name: string) {
-		return this.patch<IApp>('/v1/app/'+ id, { name: name });
+		return this.patch<IApp>('/v1/app/' + id, { name: name });
 	}
 
 	remove(id: string) {

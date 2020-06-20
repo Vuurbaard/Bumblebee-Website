@@ -16,7 +16,7 @@ export class OverviewComponent implements OnInit {
 	_sources: [any];
 	sources: [any];
 
-	search: string = "";
+	search = '';
 
 	ngOnInit() {
 		this.loading = true;
@@ -26,27 +26,26 @@ export class OverviewComponent implements OnInit {
 			this.sources = data;
 			this.loading = false;
 		}).catch(err => {
-			this.flashMessagesService.show("Something went wrong", { cssClass: 'alert-danger', timeout: 5000 });
+			this.flashMessagesService.show('Something went wrong', { cssClass: 'alert-danger', timeout: 5000 });
 		});
 	}
 
-	applySearch(search : string)
-	{
+	applySearch(search: string) {
 		const vm = this;
-		
-		let words = search.split(' ');
 
-		if(search.length === 0){
+		const words = search.split(' ');
+
+		if (search.length === 0) {
 			this.sources = Object.assign([], this._sources);
 		} else {
 			this.sources = this._sources.filter(function(item) {
 				let counter = 0;
-				
+
 				item['fragments'].forEach(element => {
 					words.forEach(search => {
-						if(element['word'] != null && element['word']['text'].includes(search)){
+						if (element['word'] != null && element['word']['text'].includes(search)) {
 							counter++;
-						}						
+						}
 					});
 				});
 				return counter == words.length;
@@ -57,15 +56,15 @@ export class OverviewComponent implements OnInit {
 
 	concatFragmentWords(fragments: Array<IFragment>): string {
 
-		let concatted = "";
+		let concatted = '';
 
 		fragments.sort(function (a, b) {
 			return Number(a.start) - Number(b.start);
 		});
 
-		for (let fragment of fragments) {
+		for (const fragment of fragments) {
 			if (fragment.word) {
-				concatted += fragment.word.text + " ";
+				concatted += fragment.word.text + ' ';
 			}
 		}
 

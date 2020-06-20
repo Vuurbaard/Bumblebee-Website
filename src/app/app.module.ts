@@ -74,8 +74,8 @@ export function tokenGetter() {
 		JwtModule.forRoot({
 			config: {
 				tokenGetter: tokenGetter,
-				whitelistedDomains: ['localhost:3000', 'localhost:4200','api-bmbl.mijnproject.nu','bmbl.mijnproject.nu', 'api.bumblebee.fm', 'bumblebee.fm'],
-				authScheme: ""
+				whitelistedDomains: ['localhost:3000', 'localhost:4200', 'api-bmbl.mijnproject.nu', 'bmbl.mijnproject.nu', 'api.bumblebee.fm', 'bumblebee.fm'],
+				authScheme: ''
 			}
 		}),
 		ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })

@@ -16,14 +16,14 @@ export class AuthenticationService {
 	}
 
 	authenticateUser(user) {
-		let headers = new HttpHeaders();
+		const headers = new HttpHeaders();
 		headers.append('Content-Type', 'application/json');
 
 		return this.http.post(environment.apiUrl + '/v1/login', user, { headers: headers });
 	}
 
 	registerUser(user) {
-		let headers = new HttpHeaders();
+		const headers = new HttpHeaders();
 		headers.append('Content-Type', 'application/json');
 
 		return this.http.post(environment.apiUrl + '/v1/register', user, { headers: headers });

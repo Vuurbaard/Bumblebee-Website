@@ -23,25 +23,25 @@ export class WordService extends ApiService {
 	async saveMultipleByTexts(texts: string[]) {
 
 		// Map the input array to GET requests
-		let promises = texts.map(text => {
+		const promises = texts.map(text => {
 			return this.getByText(text);
 		});
 
 		// Execute all GET requests
-		let result = await Promise.all(promises);
+		const result = await Promise.all(promises);
 
-		let existingWords = result.filter(word => {
+		const existingWords = result.filter(word => {
 			return word[0] != null;
 		}).map(word => word[0]);
 
-		let nonExistingWords = texts.filter(text => {
+		const nonExistingWords = texts.filter(text => {
 			return existingWords.filter(word => word.text == text).length == 0;
 		}).map(text => {
-			return this.createNew(text)
+			return this.createNew(text);
 		});
 
-		let newlyCreatedWords = await Promise.all(nonExistingWords);
-		let words = existingWords.concat(newlyCreatedWords);
+		const newlyCreatedWords = await Promise.all(nonExistingWords);
+		const words = existingWords.concat(newlyCreatedWords);
 
 		return words;
 	}

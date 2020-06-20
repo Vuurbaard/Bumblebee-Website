@@ -11,7 +11,7 @@ export class ApiService {
 	}
 
 	private defaultHeaders(): HttpHeaders {
-		let headers = new HttpHeaders();
+		const headers = new HttpHeaders();
 		headers.append('Content-Type', 'application/json');
 		headers.append('Authorization', this.authenticationService.token);
 		return headers;

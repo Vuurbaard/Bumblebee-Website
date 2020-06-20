@@ -19,10 +19,10 @@ export class UserDetailComponent implements OnInit {
 	profileForm: FormGroup;
 
 	changePasswordModel: any = {
-		currentPassword: "",
-		newPassword: "",
-		confirmPassword: ""
-	}
+		currentPassword: '',
+		newPassword: '',
+		confirmPassword: ''
+	};
 
 	ngOnInit() {
 
@@ -32,7 +32,7 @@ export class UserDetailComponent implements OnInit {
 			name: new FormControl(''),
 			email: new FormControl('', [
 				Validators.required,
-				Validators.pattern("[^ @]*@[^ @]*")
+				Validators.pattern('[^ @]*@[^ @]*')
 			]),
 			avatar: new FormControl(''),
 			// password: new FormControl('', [
@@ -45,14 +45,14 @@ export class UserDetailComponent implements OnInit {
 		this.apiService.get<IUser>('/v1/user/' + this.activeRoute.snapshot.params.userId).then(user => {
 			this.loading = false;
 			this.profileForm.patchValue({
-				"_id": user._id,
-				"username": user.username,
-				"name": user.name,
-				"email": user.email
+				'_id': user._id,
+				'username': user.username,
+				'name': user.name,
+				'email': user.email
 			});
 
 		}).catch(err => {
-			this.flashMessagesService.show("Something went wrong", { cssClass: 'alert-danger', timeout: 5000 });
+			this.flashMessagesService.show('Something went wrong', { cssClass: 'alert-danger', timeout: 5000 });
 		});
 	}
 
@@ -60,7 +60,7 @@ export class UserDetailComponent implements OnInit {
 
 		this.loading = true;
 
-		this.profileForm.get('_id').value
+		this.profileForm.get('_id').value;
 		this.apiService.patch<IUser>('/v1/user/' + this.profileForm.get('_id').value, {
 			name: this.profileForm.get('name').value,
 			email: this.profileForm.get('email').value,
@@ -73,11 +73,11 @@ export class UserDetailComponent implements OnInit {
 			});
 
 			this.profileForm.patchValue({
-				"_id": user._id,
-				"username": user.username,
-				"name": user.name,
-				"email": user.email,
-				"avatar": user.avatar
+				'_id': user._id,
+				'username': user.username,
+				'name': user.name,
+				'email': user.email,
+				'avatar': user.avatar
 			});
 
 			this.loading = false;

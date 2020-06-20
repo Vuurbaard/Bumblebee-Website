@@ -38,8 +38,7 @@ export class AppDetailComponent implements OnInit {
 					timeout: 5000
 				});
 			});
-		}
-		else {
+		} else {
 			this.router.navigate(['..'], { relativeTo: this.route });
 		}
 	}

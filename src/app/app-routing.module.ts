@@ -56,7 +56,7 @@ const routes: Routes = [
 	// { path: 'app', component: AppOverviewComponent, canActivate: [AuthGuard] },
 	// { path: 'app/:appId', component: AppDetailComponent, canActivate: [AuthGuard] },
 	// { path: 'app/create', component: AppCreateComponent, canActivate: [AuthGuard] },
-]
+];
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],

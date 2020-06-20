@@ -5,7 +5,7 @@ import { Observer } from 'rxjs';
 @Injectable()
 export class SidebarService {
 
-	visible: boolean = false;
+	visible = false;
 	visibility: Observable<boolean>;
 
 	private observer: Observer<boolean>;

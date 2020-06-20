@@ -11,7 +11,7 @@ export class AudioService extends ApiService {
 	}
 
 	randomColors: Array<string> = [
-		"#f6a821", "#24262d", "#0f83c9", "#1bbf89", "#56c0e0", "#f7af3e", "#db524b"
+		'#f6a821', '#24262d', '#0f83c9', '#1bbf89', '#56c0e0', '#f7af3e', '#db524b'
 	];
 
 	download(url: string) {
@@ -19,19 +19,18 @@ export class AudioService extends ApiService {
 	}
 
 	async tts(text: string) {
-		console.log("tts:", text);
+		console.log('tts:', text);
 
-		let data = await this.post<any>('/v1/tts', { text: text });
+		const data = await this.post<any>('/v1/tts', { text: text });
 
 		if (data.fragments) {
-			for (let index in data.fragments) {
-				let fragment = data.fragments[index];
+			for (const index in data.fragments) {
+				const fragment = data.fragments[index];
 
-				if (typeof (fragment) == "string") {
-					data.fragments[index] = { color: "#949ba2", word: { text: fragment }}
-				}
-				else {
-					fragment.color = this.randomColors[Math.floor(Math.random() * this.randomColors.length)]
+				if (typeof (fragment) == 'string') {
+					data.fragments[index] = { color: '#949ba2', word: { text: fragment }};
+				} else {
+					fragment.color = this.randomColors[Math.floor(Math.random() * this.randomColors.length)];
 				}
 			}
 		}

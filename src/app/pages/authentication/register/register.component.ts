@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
 			email: this.email,
 			username: this.username,
 			password: this.password
-		}
+		};
 
 		this.authenticationService.registerUser(user).toPromise().then(data => {
 
@@ -33,10 +33,10 @@ export class RegisterComponent implements OnInit {
 			this.router.navigate(['/login']);
 
 		}).catch(err => {
-			if(err.json().message) {
+			console.log(err);
+			if (err.json().message) {
 				this.flashMessagesService.show(err.json().message, { cssClass: 'alert-danger' });
-			}
-			else {
+			} else {
 				this.flashMessagesService.show('Something went wrong', { cssClass: 'alert-danger' });
 			}
 			this.router.navigate(['/register']);

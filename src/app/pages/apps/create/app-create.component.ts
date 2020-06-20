@@ -25,7 +25,7 @@ export class AppCreateComponent implements OnInit {
 
 	create() {
 
-		if(!this.appForm.get('name').value) {
+		if (!this.appForm.get('name').value) {
 			this.flashMessagesService.show('Name is required', {
 				cssClass: 'alert-danger',
 				timeout: 5000

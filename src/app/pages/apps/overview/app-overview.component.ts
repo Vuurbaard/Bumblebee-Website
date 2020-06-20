@@ -26,15 +26,14 @@ export class AppOverviewComponent implements OnInit {
 				this.apps = apps;
 				this.loading = false;
 			}).catch(err => {
-				this.flashMessagesService.show("Something went wrong", { cssClass: 'alert-danger', timeout: 5000 });
+				this.flashMessagesService.show('Something went wrong', { cssClass: 'alert-danger', timeout: 5000 });
 			});
-		}
-		else {
+		} else {
 			this.apiService.get<Array<IApp>>('/v1/app/').then(apps => {
 				this.apps = apps;
 				this.loading = false;
 			}).catch(err => {
-				this.flashMessagesService.show("Something went wrong", { cssClass: 'alert-danger', timeout: 5000 });
+				this.flashMessagesService.show('Something went wrong', { cssClass: 'alert-danger', timeout: 5000 });
 			});
 		}
 
