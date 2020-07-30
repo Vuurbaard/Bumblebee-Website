@@ -6,6 +6,11 @@ stages:
  - test
  - deploy
 
+variables:
+  DOCKER_DIND_IMAGE: "docker:19.03.12-dind"
+  DOCKER_IMAGE: "docker:19.03.12"
+  DOCKER_BUILDKIT: 1
+  DOCKER_CLI_EXPERIMENTAL: enabled
 
 # Retrieve all dependencies using composer
 # This uses hirak/prestissimo to improve retrieval speeds
@@ -28,7 +33,9 @@ prepare dependencies:
      - dist/
 
 build website:
-  image: docker:dind
+  image: $DOCKER_IMAGE
+  services:
+    - $DOCKER_DIND_IMAGE
   stage: build
   script:
     # install composer and get dependencies
@@ -42,7 +49,7 @@ build website:
 
 # Push the image to Docker Swarm as service and run a rolling deploy
 push to production:
-  image: docker:dind
+  image: $DOCKER_IMAGE
   stage: deploy
   variables:
     DOCKER_HOST: ssh://$SSH_USER@$SSH_HOST
