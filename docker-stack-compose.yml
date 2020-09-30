@@ -15,9 +15,10 @@ services:
         deploy:
             labels:
                 - traefik.enable=true
-                - traefik.http.routers.bmbl-web.rule=Host(`bmbl.cloud`) || Host(`bmbl.mijnproject.nu`)
-                - traefik.http.routers.bmbl-web.tls=true
-                - traefik.http.routers.bmbl-web.tls.certresolver=myresolver
+                - traefik.http.routers.http-bmbl-web.rule=Host(`bmbl.cloud`) || Host(`bmbl.mijnproject.nu`)
+                - traefik.http.routers.https-bmbl-web.rule=Host(`bmbl.cloud`) || Host(`bmbl.mijnproject.nu`)
+                - traefik.http.routers.https-bmbl-web.tls=true
+                - traefik.http.routers.https-bmbl-web.tls.certresolver=myresolver
                 - traefik.http.services.bmbl-web-service.loadbalancer.server.port=80
             restart_policy:
                 condition: any
