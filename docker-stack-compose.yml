@@ -1,6 +1,5 @@
 version: '3.7'
 services:
-
     website:
         image: ${CI_REGISTRY}/bumblebee/website:latest
         environment:
@@ -11,6 +10,8 @@ services:
             - NG_OPTIONAL=--prod
         depends_on:
             - api
+        networks:
+            - proxy-net
         deploy:
             labels:
                 - traefik.enable=true
@@ -27,3 +28,7 @@ services:
             update_config:
                 parallelism: 2
                 delay: 10s
+
+networks:
+   proxy-net:
+      external: true
