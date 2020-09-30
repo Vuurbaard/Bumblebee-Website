@@ -15,7 +15,7 @@ variables:
 # Retrieve all dependencies using composer
 # This uses hirak/prestissimo to improve retrieval speeds
 prepare dependencies:
-  image: node:12
+  image: node:14
   stage: prepare
   script:
     - npm install -g @angular/cli
