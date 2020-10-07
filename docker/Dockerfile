@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginx:1.19-alpine
 
 # You have to build the app before building this image.
 # This image solve purpose is to serve content
