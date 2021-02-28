@@ -21,10 +21,7 @@ services:
                 - traefik.http.routers.https-bmbl-web.tls.certresolver=myresolver
                 - traefik.http.services.bmbl-web-service.loadbalancer.server.port=80
             restart_policy:
-                condition: any
-                delay: 5s
-                max_attempts: 3
-                window: 120s
+                delay: 30s
             replicas: 1
             update_config:
                 parallelism: 2
