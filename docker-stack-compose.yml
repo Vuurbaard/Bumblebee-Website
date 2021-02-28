@@ -15,7 +15,6 @@ services:
         deploy:
             labels:
                 - traefik.enable=true
-                - traefik.http.routers.http-bmbl-web.rule=Host(`bmbl.cloud`) || Host(`bmbl.mijnproject.nu`)
                 - traefik.http.routers.https-bmbl-web.rule=Host(`bmbl.cloud`) || Host(`bmbl.mijnproject.nu`)
                 - traefik.http.routers.https-bmbl-web.tls=true
                 - traefik.http.routers.https-bmbl-web.tls.certresolver=myresolver
