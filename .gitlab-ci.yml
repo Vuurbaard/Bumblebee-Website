@@ -7,7 +7,7 @@ stages:
  - deploy
 
 variables:
-  NODE_IMAGE: "node:14-alpine"
+  NODE_IMAGE: "node:14"
   DOCKER_DIND_IMAGE: "docker:20.10.3-dind"
   DOCKER_IMAGE: "docker:20.10.3"
   DOCKER_BUILDKIT: 1
