@@ -7,15 +7,16 @@ stages:
  - deploy
 
 variables:
-  DOCKER_DIND_IMAGE: "docker:19.03.12-dind"
-  DOCKER_IMAGE: "docker:19.03.12"
+  NODE_IMAGE: "node:14-alpine"
+  DOCKER_DIND_IMAGE: "docker:20.10.3-dind"
+  DOCKER_IMAGE: "docker:20.10.3"
   DOCKER_BUILDKIT: 1
   DOCKER_CLI_EXPERIMENTAL: enabled
 
 # Retrieve all dependencies using composer
 # This uses hirak/prestissimo to improve retrieval speeds
 prepare dependencies:
-  image: node:14
+  image: $NODE_IMAGE
   stage: prepare
   script:
     - npm install -g @angular/cli
